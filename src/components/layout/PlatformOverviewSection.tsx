@@ -1,0 +1,164 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+// No extra libraries needed — the particle spheres are plain SVG, generated
+// with a small seeded random-number generator so the same seed always
+// produces the same layout (safe for server rendering, no hydration
+// mismatch, no client JS required).
+
+function mulberry32(seed: number) {
+  return function random() {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+type Particle = { x: number; y: number; r: number; o: number };
+
+function generateParticles(seed: number, count = 700): Particle[] {
+  const rand = mulberry32(seed);
+  const points: Particle[] = [];
+
+  // Off-center "hot spot" so the cloud reads as an uneven, organic cluster
+  // rather than a uniform dot-filled circle — matching the reference.
+  const clusterAngle = rand() * Math.PI * 2;
+  const clusterDist = 0.2 + rand() * 0.25;
+  const clusterX = Math.cos(clusterAngle) * clusterDist;
+  const clusterY = Math.sin(clusterAngle) * clusterDist * 0.85;
+
+  let attempts = 0;
+  while (points.length < count && attempts < count * 8) {
+    attempts++;
+    const x = rand() * 2 - 1;
+    const y = rand() * 2 - 1;
+    const d = Math.hypot(x, y);
+    if (d > 1) continue;
+
+    const distToCluster = Math.hypot(x - clusterX, y - clusterY);
+    const keepChance = Math.max(0.12, 1 - distToCluster * 0.9);
+    if (rand() > keepChance) continue;
+
+    points.push({
+      x,
+      y,
+      r: 0.5 + rand() * 1.2,
+      o: Math.max(0.1, 1 - distToCluster * 1.05) * (0.5 + rand() * 0.5),
+    });
+  }
+  return points;
+}
+
+function ParticleSphere({
+  seed,
+  className,
+}: {
+  seed: number;
+  className?: string;
+}) {
+  const points = generateParticles(seed);
+  const size = 240;
+  const center = size / 2;
+  const scale = size / 2 - 4;
+
+  return (
+    <svg
+      viewBox={`0 0 ${size} ${size}`}
+      className={className}
+      aria-hidden="true"
+    >
+      {points.map((p, i) => (
+        <circle
+          key={i}
+          cx={center + p.x * scale}
+          cy={center + p.y * scale}
+          r={p.r}
+          className="fill-indigo-600 dark:fill-indigo-400"
+          opacity={p.o}
+        />
+      ))}
+    </svg>
+  );
+}
+
+const FEATURES = [
+  {
+    title: "AI-Powered Neuro Intelligence",
+    description:
+      "AI systems designed to understand cognitive context and drive precise, real-time intelligence.",
+    seed: 101,
+  },
+  {
+    title: "Workflow-Aware Cognitive Systems",
+    description:
+      "Seamless integration into neuroscience and engineering workflows to streamline analysis and decision-making.",
+    seed: 202,
+  },
+  {
+    title: "Secure, Data-Driven Intelligence",
+    description:
+      "Built on trusted neuroscience and cognitive datasets, our platform delivers reliable, scalable, and responsible AI systems.",
+    seed: 303,
+  },
+];
+
+export function PlatformOverviewSection() {
+  return (
+    <section className="border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950">
+      {/* Headline + supporting copy + CTA */}
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 border-b border-gray-200 px-4 py-16 dark:border-gray-800 sm:px-6 lg:grid-cols-[1fr_3fr] lg:px-8 lg:py-20">
+        <div aria-hidden />
+
+        <div>
+          <h2 className="max-w-xl text-2xl font-bold leading-snug tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
+            Integrating neuroscience, AI, and data to power next-generation
+            neurointelligent systems.
+          </h2>
+
+          <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
+            <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              Our platform unifies neuroscience-driven AI systems with
+              real-world neural and cognitive data to enable smarter, faster
+              brain-focused applications.
+            </p>
+            <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              By responding to neural context and system workflows, these AI
+              systems enable efficient operations and consistent,
+              high-performance cognitive solutions.
+            </p>
+          </div>
+
+          <Link
+            href="/platform"
+            className="mt-8 inline-flex items-center gap-1.5 rounded-full bg-gray-900 px-5 py-2.5 text-[13px] font-medium text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+          >
+            Discover Platform
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </div>
+
+      {/* Three-column feature grid with particle-sphere visuals */}
+      <div className="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-gray-200 dark:divide-gray-800 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        {FEATURES.map((feature) => (
+          <div key={feature.title} className="px-4 py-12 sm:px-8">
+            <h3 className="max-w-[14rem] text-sm font-bold leading-snug text-gray-900 dark:text-gray-100">
+              {feature.title}
+            </h3>
+
+            <ParticleSphere
+              seed={feature.seed}
+              className="mx-auto my-8 h-48 w-48"
+            />
+
+            <p className="max-w-[16rem] text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+              {feature.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
