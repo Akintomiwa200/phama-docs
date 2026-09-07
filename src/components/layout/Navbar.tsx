@@ -15,18 +15,29 @@ export function Navbar() {
     <div className="pointer-events-none fixed inset-x-0 top-4 z-40 flex justify-center px-4 sm:px-6">
       <nav
         className={cn(
-          "pointer-events-auto grid h-14 w-full max-w-6xl items-center",
-          "grid-cols-[auto_1fr_auto] rounded-full bg-white/20 pl-4 pr-1.5",
-          "border border-white/40 shadow-lg shadow-gray-900/5 backdrop-blur-2xl backdrop-saturate-150",
-          "dark:bg-white/5 dark:border-white/20"
+          "pointer-events-auto relative isolate grid h-14 w-full max-w-6xl items-center",
+          "grid-cols-[auto_1fr_auto] rounded-full pl-4 pr-1.5",
+          "border border-white/40 shadow-lg shadow-gray-900/5",
+          "dark:border-white/20"
         )}
       >
+        {/* Glass layer — kept separate from content so the adaptive text
+            below can blend against the real page backdrop (backdrop-filter
+            on the pill itself breaks mix-blend-mode in light mode). */}
+        <div
+          aria-hidden="true"
+          className={cn(
+            "absolute inset-0 -z-10 rounded-full bg-white/20",
+            "backdrop-blur-2xl backdrop-saturate-150",
+            "dark:bg-white/5"
+          )}
+        />
         {/* Logo — left column */}
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-6 w-6 items-center justify-center rounded-md bg-indigo-500 text-white text-xs font-bold">
             N
           </div>
-          <span className="text-sm font-bold text-gray-900 dark:text-gray-100">
+          <span className="text-adaptive text-sm font-bold">
             NeuroLai
           </span>
         </Link>
@@ -38,10 +49,10 @@ export function Navbar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "text-[13px] font-medium transition-colors",
+                "text-adaptive text-[13px] font-medium transition-opacity",
                 pathname === item.href
-                  ? "text-gray-900 dark:text-gray-100"
-                  : "text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                  ? "opacity-100"
+                  : "opacity-70 hover:opacity-100"
               )}
             >
               {item.label}
@@ -70,17 +81,21 @@ export function Navbar() {
       </nav>
 
       {mobileMenuOpen && (
-        <div className="pointer-events-auto absolute left-4 right-4 top-[4.5rem] rounded-2xl border border-white/40 bg-white/25 p-3 shadow-xl shadow-gray-900/10 backdrop-blur-2xl backdrop-saturate-150 dark:border-white/20 dark:bg-white/5 sm:left-6 sm:right-6 md:hidden">
+        <div className="pointer-events-auto absolute left-4 right-4 top-[4.5rem] isolate rounded-2xl border border-white/40 p-3 shadow-xl shadow-gray-900/10 sm:left-6 sm:right-6 md:hidden">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 -z-10 rounded-2xl bg-white/25 backdrop-blur-2xl backdrop-saturate-150 dark:bg-white/5"
+          />
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setMobileMenuOpen(false)}
               className={cn(
-                "block rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                "block rounded-lg px-3 py-2 text-adaptive text-sm font-medium transition-opacity",
                 pathname === item.href
-                  ? "text-gray-900 dark:text-gray-100"
-                  : "text-gray-500 hover:text-gray-900 dark:text-gray-100"
+                  ? "opacity-100"
+                  : "opacity-70 hover:opacity-100"
               )}
             >
               {item.label}

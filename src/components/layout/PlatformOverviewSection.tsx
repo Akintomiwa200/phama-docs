@@ -108,22 +108,22 @@ export function PlatformOverviewSection() {
   return (
     <section className="border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950">
       {/* Headline + supporting copy + CTA */}
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 border-b border-gray-200 px-4 py-16 dark:border-gray-800 sm:px-6 lg:grid-cols-[1fr_3fr] lg:px-8 lg:py-20">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 border-b border-gray-200 px-4 py-16 dark:border-gray-800 sm:px-6 lg:grid-cols-[1fr_4fr] lg:px-8 lg:py-24">
         <div aria-hidden />
 
-        <div>
-          <h2 className="max-w-xl text-2xl font-bold leading-snug tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
+        <div className="flex flex-col items-start">
+          <h2 className="max-w-2xl text-left text-[2rem] font-bold leading-[1.2] tracking-tight text-gray-900 dark:text-gray-100 sm:text-[2.5rem]">
             Integrating neuroscience, AI, and data to power next-generation
             neurointelligent systems.
           </h2>
 
-          <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
-            <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+          <div className="mt-8 grid grid-cols-1 gap-x-12 gap-y-6 sm:grid-cols-2">
+            <p className="text-[15px] leading-relaxed text-gray-500 dark:text-gray-400">
               Our platform unifies neuroscience-driven AI systems with
               real-world neural and cognitive data to enable smarter, faster
               brain-focused applications.
             </p>
-            <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+            <p className="text-[15px] leading-relaxed text-gray-500 dark:text-gray-400">
               By responding to neural context and system workflows, these AI
               systems enable efficient operations and consistent,
               high-performance cognitive solutions.
@@ -132,10 +132,10 @@ export function PlatformOverviewSection() {
 
           <Link
             href="/platform"
-            className="mt-8 inline-flex items-center gap-1.5 rounded-full bg-gray-900 px-5 py-2.5 text-[13px] font-medium text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+            className="mt-10 inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-3 text-[14px] font-medium text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
           >
             Discover Platform
-            <ArrowRight className="h-3.5 w-3.5" />
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
@@ -143,17 +143,17 @@ export function PlatformOverviewSection() {
       {/* Three-column feature grid with particle-sphere visuals */}
       <div className="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-gray-200 dark:divide-gray-800 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
         {FEATURES.map((feature) => (
-          <div key={feature.title} className="px-4 py-12 sm:px-8">
-            <h3 className="max-w-[14rem] text-sm font-bold leading-snug text-gray-900 dark:text-gray-100">
+          <div key={feature.title} className="flex flex-col items-center px-6 py-16 text-center sm:px-8">
+            <h3 className="max-w-[14rem] text-[15px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
               {feature.title}
             </h3>
 
             <ParticleSphere
               seed={feature.seed}
-              className="mx-auto my-8 h-48 w-48"
+              className="mx-auto my-10 h-44 w-44"
             />
 
-            <p className="max-w-[16rem] text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+            <p className="max-w-[16rem] text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
               {feature.description}
             </p>
           </div>

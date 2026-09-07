@@ -17,26 +17,38 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative isolate h-[520px] overflow-hidden bg-[#f0f0ff] sm:h-[580px] lg:h-[620px]">
-      {/* =========================================================
-          VERY SOFT BACKGROUND GLOW
-          ========================================================= */}
+    <footer
+      className="
+        relative
+        isolate
+        h-[520px]
+        w-full
+        overflow-hidden
+        bg-[#f1f1ff]
+        dark:bg-gray-950
+        sm:h-[525px]
+        lg:h-[530px]
+      "
+    >
+      {/* =====================================================
+          FIGMA BACKGROUND GLOW
+          ===================================================== */}
+
       <div
         aria-hidden="true"
         className="
           pointer-events-none
           absolute
-          left-[8%]
-          top-[18%]
-          h-[320px]
-          w-[420px]
+          -left-[5%]
+          top-[24%]
+          h-[430px]
+          w-[700px]
           rounded-full
-          opacity-70
-          blur-[90px]
+          blur-[105px]
         "
         style={{
           background:
-            "radial-gradient(circle, rgba(184,169,255,0.50) 0%, rgba(184,169,255,0.20) 42%, rgba(184,169,255,0) 75%)",
+            "radial-gradient(ellipse at center, rgba(171,150,255,0.78) 0%, rgba(174,154,255,0.58) 30%, rgba(190,175,255,0.28) 55%, rgba(190,175,255,0) 78%)",
         }}
       />
 
@@ -45,118 +57,141 @@ export function Footer() {
         className="
           pointer-events-none
           absolute
-          right-[18%]
-          top-[5%]
-          h-[300px]
-          w-[380px]
+          left-[28%]
+          top-[30%]
+          h-[360px]
+          w-[650px]
           rounded-full
-          opacity-50
-          blur-[100px]
+          blur-[120px]
         "
         style={{
           background:
-            "radial-gradient(circle, rgba(220,202,255,0.45) 0%, rgba(220,202,255,0) 72%)",
+            "radial-gradient(ellipse, rgba(183,164,255,0.46) 0%, rgba(183,164,255,0.22) 42%, rgba(183,164,255,0) 75%)",
         }}
       />
 
-      {/* =========================================================
-          CONTENT
-          ========================================================= */}
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          right-[2%]
+          top-[2%]
+          h-[400px]
+          w-[500px]
+          rounded-full
+          blur-[110px]
+        "
+        style={{
+          background:
+            "radial-gradient(ellipse, rgba(229,222,255,0.62) 0%, rgba(229,222,255,0) 72%)",
+        }}
+      />
+
+      {/* =====================================================
+          MAIN CONTENT
+          ===================================================== */}
+
       <div
         className="
           relative
           z-10
           mx-auto
+          h-full
           w-full
-          max-w-[1280px]
-          px-6
-          pt-[25px]
-          sm:px-8
-          lg:px-10
-          xl:px-12
+          max-w-[1040px]
+          px-5
+          pt-[58px]
+          sm:px-6
+          lg:pt-[58px]
         "
       >
         <div
           className="
             flex
-            flex-col
-            gap-10
-            sm:flex-row
-            sm:items-start
-            sm:justify-between
+            items-start
+            justify-between
           "
         >
-          {/* =====================================================
-              LEFT
-              ===================================================== */}
-          <div className="max-w-[330px]">
+          {/* =================================================
+              LEFT CONTENT
+              ================================================= */}
+
+          <div className="w-[390px]">
             <h2
               className="
-                max-w-[330px]
-                text-[19px]
+                m-0
+                max-w-[390px]
+                text-[24px]
                 font-[600]
-                leading-[1.04]
-                tracking-[-0.045em]
+                leading-[1.02]
+                tracking-[-0.055em]
                 text-[#090909]
-                sm:text-[20px]
-                lg:text-[21px]
+                dark:text-gray-100
+                sm:text-[25px]
+                lg:text-[26px]
               "
             >
               We are advancing brain-inspired AI to
-              <br className="hidden sm:block" />
+              <br />
               solve meaningful, real-world problems.
             </h2>
 
             <Link
               href="/contact"
               className="
-                mt-[14px]
+                mt-[30px]
                 inline-flex
-                h-[27px]
+                h-[40px]
                 items-center
+                justify-center
                 rounded-full
                 bg-[#111111]
-                px-[14px]
-                text-[8px]
+                px-[21px]
+                text-[11px]
                 font-[500]
-                tracking-[-0.01em]
+                leading-none
+                tracking-[-0.02em]
                 text-white
-                transition-transform
+                transition-all
                 duration-200
                 hover:scale-[1.03]
+                hover:bg-black
               "
             >
-              Let's connect
+              Let&apos;s connect
             </Link>
           </div>
 
-          {/* =====================================================
+          {/* =================================================
               RIGHT NAVIGATION
-              ===================================================== */}
+              ================================================= */}
+
           <div
             className="
               flex
-              gap-[55px]
-              pr-0
-              sm:pr-[20px]
-              lg:gap-[70px]
-              lg:pr-[35px]
+              gap-[72px]
+              pt-[2px]
             "
           >
             {/* Platform */}
+
             <nav aria-label="Footer navigation">
-              <ul className="space-y-[6px]">
+              <ul className="m-0 list-none space-y-[12px] p-0">
                 {platformLinks.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
                       className="
-                        text-[8px]
+                        block
+                        text-[11px]
                         font-[400]
                         leading-none
-                        tracking-[-0.01em]
-                        text-[#151515]
+                        tracking-[-0.025em]
+                        text-[#161616]
+                        dark:text-gray-300
                         transition-opacity
+                        duration-200
                         hover:opacity-50
                       "
                     >
@@ -168,19 +203,24 @@ export function Footer() {
             </nav>
 
             {/* Social */}
+
             <nav aria-label="Social links">
-              <ul className="space-y-[6px]">
+              <ul className="m-0 list-none space-y-[12px] p-0">
                 {socialLinks.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
                       className="
-                        text-[8px]
+                        block
+                        whitespace-nowrap
+                        text-[11px]
                         font-[400]
                         leading-none
-                        tracking-[-0.01em]
-                        text-[#151515]
+                        tracking-[-0.025em]
+                        text-[#161616]
+                        dark:text-gray-300
                         transition-opacity
+                        duration-200
                         hover:opacity-50
                       "
                     >
@@ -194,23 +234,18 @@ export function Footer() {
         </div>
       </div>
 
-      {/* =========================================================
-          HUGE BOTTOM WORDMARK
+      {/* =====================================================
+          LARGE NEUROAI WORDMARK
+          ===================================================== */}
 
-          This intentionally sits below the viewport boundary,
-          reproducing the Figma composition where only the upper
-          portion of the wordmark is visible.
-          ========================================================= */}
       <div
         aria-hidden="true"
         className="
           pointer-events-none
           absolute
-          -bottom-[42px]
-          left-1/2
+          bottom-[-92px]
+          left-[10%]
           z-0
-          w-max
-          -translate-x-1/2
           select-none
           whitespace-nowrap
         "
@@ -218,18 +253,18 @@ export function Footer() {
         <span
           className="
             block
-            text-[145px]
+            text-[245px]
             font-[500]
             leading-[0.72]
-            tracking-[-0.075em]
+            tracking-[-0.085em]
             text-white
-            sm:text-[190px]
-            lg:text-[245px]
-            xl:text-[285px]
+            dark:text-gray-900
+            sm:text-[260px]
+            lg:text-[285px]
           "
         >
-          Neuro
-          <span className="tracking-[-0.09em]">ai</span>
+          Neurofi
+          <span className="tracking-[-0.11em]">ai</span>
         </span>
       </div>
     </footer>

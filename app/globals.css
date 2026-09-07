@@ -1,8 +1,23 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --scrollbar-thumb: rgba(99, 102, 241, 0.25);
+  --scrollbar-thumb-active: rgba(99, 102, 241, 0.55);
+  color-scheme: light;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+  scrollbar-width: thin;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --scrollbar-thumb: rgba(165, 180, 252, 0.35);
+  --scrollbar-thumb-active: rgba(165, 180, 252, 0.7);
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -12,15 +27,62 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ==========================================================================
+   Adaptive text — color auto-contrasts to whatever background sits behind
+   the element it is applied to (mix-blend-mode: difference inverts white
+   against the backdrop).
+   ========================================================================== */
+.text-adaptive {
+  color: #ffffff;
+  mix-blend-mode: difference;
+}
+
+/* ==========================================================================
+   Custom scrollbar — thin, rounded, theme-aware thumb. The thumb is kept
+   subtle at rest and "lights up" whenever the page is being scrolled
+   (html.is-scrolling is toggled by ScrollManager) then fades back after
+   scrolling stops — a scroll-triggered look.
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  opacity: 0.45;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-active);
+  background-clip: padding-box;
+  opacity: 1;
+}
+
+html.is-scrolling {
+  scrollbar-color: var(--scrollbar-thumb-active) transparent;
+}
+
+html.is-scrolling::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-active);
+  background-clip: padding-box;
+  opacity: 1;
 }
