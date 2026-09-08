@@ -48,7 +48,7 @@ export function Footer() {
         "
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(171,150,255,0.78) 0%, rgba(174,154,255,0.58) 30%, rgba(190,175,255,0.28) 55%, rgba(190,175,255,0) 78%)",
+            "radial-gradient(ellipse at center, rgba(255,150,185,0.78) 0%, rgba(255,160,190,0.58) 30%, rgba(255,180,205,0.28) 55%, rgba(255,180,205,0) 78%)",
         }}
       />
 
@@ -66,7 +66,7 @@ export function Footer() {
         "
         style={{
           background:
-            "radial-gradient(ellipse, rgba(183,164,255,0.46) 0%, rgba(183,164,255,0.22) 42%, rgba(183,164,255,0) 75%)",
+            "radial-gradient(ellipse, rgba(255,170,200,0.46) 0%, rgba(255,170,200,0.22) 42%, rgba(255,170,200,0) 75%)",
         }}
       />
 
@@ -84,7 +84,7 @@ export function Footer() {
         "
         style={{
           background:
-            "radial-gradient(ellipse, rgba(229,222,255,0.62) 0%, rgba(229,222,255,0) 72%)",
+            "radial-gradient(ellipse, rgba(255,230,238,0.62) 0%, rgba(255,230,238,0) 72%)",
         }}
       />
 
@@ -122,19 +122,21 @@ export function Footer() {
               className="
                 m-0
                 max-w-[390px]
-                text-[24px]
+                text-[27px]
                 font-[600]
                 leading-[1.02]
                 tracking-[-0.055em]
                 text-[#090909]
                 dark:text-gray-100
-                sm:text-[25px]
-                lg:text-[26px]
+                sm:text-[28px]
+                lg:text-[30px]
               "
             >
-              We are advancing brain-inspired AI to
+              We are building a complete medical dictionary,
               <br />
-              solve meaningful, real-world problems.
+              drug database and library for students,
+              <br />
+              clinicians and patients.
             </h2>
 
             <Link
@@ -142,13 +144,13 @@ export function Footer() {
               className="
                 mt-[30px]
                 inline-flex
-                h-[40px]
+                h-[46px]
                 items-center
                 justify-center
                 rounded-full
                 bg-[#111111]
-                px-[21px]
-                text-[11px]
+                px-[24px]
+                text-[14px]
                 font-[500]
                 leading-none
                 tracking-[-0.02em]
@@ -177,14 +179,14 @@ export function Footer() {
             {/* Platform */}
 
             <nav aria-label="Footer navigation">
-              <ul className="m-0 list-none space-y-[12px] p-0">
+              <ul className="m-0 list-none space-y-[14px] p-0">
                 {platformLinks.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
                       className="
                         block
-                        text-[11px]
+                        text-[15px]
                         font-[400]
                         leading-none
                         tracking-[-0.025em]
@@ -205,7 +207,7 @@ export function Footer() {
             {/* Social */}
 
             <nav aria-label="Social links">
-              <ul className="m-0 list-none space-y-[12px] p-0">
+              <ul className="m-0 list-none space-y-[14px] p-0">
                 {socialLinks.map((link) => (
                   <li key={link.label}>
                     <Link
@@ -213,7 +215,7 @@ export function Footer() {
                       className="
                         block
                         whitespace-nowrap
-                        text-[11px]
+                        text-[15px]
                         font-[400]
                         leading-none
                         tracking-[-0.025em]
@@ -235,7 +237,7 @@ export function Footer() {
       </div>
 
       {/* =====================================================
-          LARGE NEUROAI WORDMARK
+          LARGE METEBOLME WORDMARK
           ===================================================== */}
 
       <div
@@ -243,9 +245,10 @@ export function Footer() {
         className="
           pointer-events-none
           absolute
-          bottom-[-92px]
-          left-[10%]
+          bottom-[-6px]
+          left-1/2
           z-0
+          -translate-x-1/2
           select-none
           whitespace-nowrap
         "
@@ -253,18 +256,16 @@ export function Footer() {
         <span
           className="
             block
-            text-[245px]
+            text-[17vw]
             font-[500]
             leading-[0.72]
             tracking-[-0.085em]
             text-white
             dark:text-gray-900
-            sm:text-[260px]
-            lg:text-[285px]
           "
         >
-          Neurofi
-          <span className="tracking-[-0.11em]">ai</span>
+          Metebol
+          <span className="tracking-[-0.11em]">me</span>
         </span>
       </div>
     </footer>

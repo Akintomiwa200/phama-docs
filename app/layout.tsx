@@ -15,8 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NeuroLai - Pharmaceutical Documentation",
-  description: "Pharmaceutical documentation and analytics platform",
+  title: "Metebolme - Medical Dictionary, Library & Database",
+  description:
+    "A comprehensive medical dictionary, drug database and curated medical library.",
   icons: {
     icon: "/icon.svg",
   },

@@ -52,7 +52,7 @@ export function DecodeSignalsSection() {
             "
             style={{
               background:
-                "linear-gradient(105deg, rgba(224,220,255,0.95) 0%, rgba(214,208,255,0.85) 38%, rgba(190,183,255,0.8) 67%, rgba(221,215,255,0.9) 100%)",
+                "linear-gradient(105deg, rgba(255,222,235,0.95) 0%, rgba(255,214,228,0.85) 38%, rgba(255,190,207,0.8) 67%, rgba(255,220,232,0.9) 100%)",
             }}
           />
 
@@ -84,27 +84,27 @@ export function DecodeSignalsSection() {
               >
                 <stop
                   offset="0%"
-                  stopColor="#eeeeff"
+                  stopColor="#fff0f2"
                 />
 
                 <stop
                   offset="35%"
-                  stopColor="#d6d1fa"
+                  stopColor="#ffd8e0"
                 />
 
                 <stop
                   offset="62%"
-                  stopColor="#aaa1f4"
+                  stopColor="#ffa3b3"
                 />
 
                 <stop
                   offset="82%"
-                  stopColor="#8871ee"
+                  stopColor="#f75f78"
                 />
 
                 <stop
                   offset="100%"
-                  stopColor="#7045e5"
+                  stopColor="#e11d48"
                 />
               </linearGradient>
 
@@ -135,7 +135,7 @@ export function DecodeSignalsSection() {
                 />
               </radialGradient>
 
-              {/* Right purple light */}
+              {/* Right red light */}
 
               <radialGradient
                 id="neuro-panel-purple"
@@ -145,19 +145,19 @@ export function DecodeSignalsSection() {
               >
                 <stop
                   offset="0%"
-                  stopColor="#7444e8"
+                  stopColor="#e11d48"
                   stopOpacity="0.95"
                 />
 
                 <stop
                   offset="45%"
-                  stopColor="#8d72ef"
+                  stopColor="#fb7185"
                   stopOpacity="0.50"
                 />
 
                 <stop
                   offset="100%"
-                  stopColor="#9c8bf2"
+                  stopColor="#fda4af"
                   stopOpacity="0"
                 />
               </radialGradient>
@@ -203,7 +203,7 @@ export function DecodeSignalsSection() {
                   dx="0"
                   dy="3"
                   stdDeviation="7"
-                  floodColor="#c6bfff"
+                  floodColor="#ffc6d1"
                   floodOpacity="0.22"
                 />
               </filter>
@@ -454,13 +454,13 @@ export function DecodeSignalsSection() {
                 lg:text-[22px]
               "
             >
-              The brain is a highly complex system.
+              The human body is a complex system of
               <br />
-              Our platform is purpose-built to decode neural
+              interconnected terms and concepts. Our
               <br />
-              signals and enable scalable, neuroscience -
+              dictionary cross-links every entry &mdash;
               <br />
-              driven AI engineering.
+              conditions, symptoms, drugs and anatomy.
             </p>
           </div>
         </div>

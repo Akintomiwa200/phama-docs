@@ -6,10 +6,10 @@ import { BarChartComponent } from "@/components/charts/BarChart";
 export function OrdersChart() {
   return (
     <BarChartComponent
-      title="Monthly Orders"
+      title="Entries Saved"
       data={SALES_DATA}
       xAxisKey="date"
-      dataKeys={[{ key: "orders", color: "#8b5cf6", name: "Orders" }]}
+      dataKeys={[{ key: "orders", color: "#fb7185", name: "Saved" }]}
       height={300}
     />
   );

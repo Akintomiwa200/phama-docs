@@ -6,13 +6,13 @@ import { StackedBarChart } from "@/components/charts/StackedBarChart";
 export function InventoryChart() {
   return (
     <StackedBarChart
-      title="Inventory Status"
+      title="Database Entry Coverage"
       data={INVENTORY_DATA}
       xAxisKey="category"
       dataKeys={[
-        { key: "inStock", color: "#22c55e", name: "In Stock" },
-        { key: "lowStock", color: "#eab308", name: "Low Stock" },
-        { key: "outOfStock", color: "#ef4444", name: "Out of Stock" },
+        { key: "complete", color: "#22c55e", name: "Complete" },
+        { key: "partial", color: "#eab308", name: "Partial" },
+        { key: "missing", color: "#ef4444", name: "Missing" },
       ]}
       height={350}
     />

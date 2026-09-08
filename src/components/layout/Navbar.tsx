@@ -34,11 +34,11 @@ export function Navbar() {
         />
         {/* Logo — left column */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-6 w-6 items-center justify-center rounded-md bg-indigo-500 text-white text-xs font-bold">
+          <div className="flex h-6 w-6 items-center justify-center rounded-md bg-rose-500 text-white text-xs font-bold">
             N
           </div>
           <span className="text-adaptive text-sm font-bold">
-            NeuroLai
+            Metebolme
           </span>
         </Link>
 

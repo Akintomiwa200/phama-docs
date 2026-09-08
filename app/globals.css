@@ -5,8 +5,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --scrollbar-thumb: rgba(99, 102, 241, 0.25);
-  --scrollbar-thumb-active: rgba(99, 102, 241, 0.55);
+  --scrollbar-thumb: rgba(244, 63, 94, 0.25);
+  --scrollbar-thumb-active: rgba(244, 63, 94, 0.55);
   color-scheme: light;
   scrollbar-color: var(--scrollbar-thumb) transparent;
   scrollbar-width: thin;
@@ -15,8 +15,8 @@
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
-  --scrollbar-thumb: rgba(165, 180, 252, 0.35);
-  --scrollbar-thumb-active: rgba(165, 180, 252, 0.7);
+  --scrollbar-thumb: rgba(253, 164, 175, 0.35);
+  --scrollbar-thumb-active: rgba(253, 164, 175, 0.7);
   color-scheme: dark;
 }
 
@@ -45,6 +45,30 @@ body {
 .text-adaptive {
   color: #ffffff;
   mix-blend-mode: difference;
+}
+
+/* ==========================================================================
+   Marquee — seamless, endless right-to-left scroll. The animated track holds
+   two identical copies of the content, so translating from 0 to -50% loops
+   invisibly (both positions look the same).
+   ========================================================================== */
+@keyframes marquee-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-right {
+  animation: marquee-right 25s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-right {
+    animation: none;
+  }
 }
 
 /* ==========================================================================

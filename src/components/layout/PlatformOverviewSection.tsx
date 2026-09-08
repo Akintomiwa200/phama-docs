@@ -75,7 +75,7 @@ function ParticleSphere({
           cx={center + p.x * scale}
           cy={center + p.y * scale}
           r={p.r}
-          className="fill-indigo-600 dark:fill-indigo-400"
+          className="fill-rose-600 dark:fill-rose-400"
           opacity={p.o}
         />
       ))}
@@ -85,21 +85,21 @@ function ParticleSphere({
 
 const FEATURES = [
   {
-    title: "AI-Powered Neuro Intelligence",
+    title: "Structured Drug Database",
     description:
-      "AI systems designed to understand cognitive context and drive precise, real-time intelligence.",
+      "Every drug as a structured monograph &mdash; class, indications, dosages, interactions and references.",
     seed: 101,
   },
   {
-    title: "Workflow-Aware Cognitive Systems",
+    title: "Cross-Linked Terminology",
     description:
-      "Seamless integration into neuroscience and engineering workflows to streamline analysis and decision-making.",
+      "Hyperlinked terms connect symptoms, conditions, anatomy and pharmacology in one navigable graph.",
     seed: 202,
   },
   {
-    title: "Secure, Data-Driven Intelligence",
+    title: "Curated Medical Library",
     description:
-      "Built on trusted neuroscience and cognitive datasets, our platform delivers reliable, scalable, and responsible AI systems.",
+      "Trusted references, guidelines and reviews &mdash; organized, versioned and ready for lookup.",
     seed: 303,
   },
 ];
@@ -113,28 +113,28 @@ export function PlatformOverviewSection() {
 
         <div className="flex flex-col items-start">
           <h2 className="max-w-2xl text-left text-[2rem] font-bold leading-[1.2] tracking-tight text-gray-900 dark:text-gray-100 sm:text-[2.5rem]">
-            Integrating neuroscience, AI, and data to power next-generation
-            neurointelligent systems.
+            A living medical database that connects every term, drug and
+            condition.
           </h2>
 
           <div className="mt-8 grid grid-cols-1 gap-x-12 gap-y-6 sm:grid-cols-2">
             <p className="text-[15px] leading-relaxed text-gray-500 dark:text-gray-400">
-              Our platform unifies neuroscience-driven AI systems with
-              real-world neural and cognitive data to enable smarter, faster
-              brain-focused applications.
+              Our platform unifies medical terminology, pharmacology and
+              clinical references so every search returns a complete,
+              trusted answer.
             </p>
             <p className="text-[15px] leading-relaxed text-gray-500 dark:text-gray-400">
-              By responding to neural context and system workflows, these AI
-              systems enable efficient operations and consistent,
-              high-performance cognitive solutions.
+              By relating every entry to its anatomy, symptoms and related
+              drugs, we make complex medical knowledge fast to navigate and
+              easy to verify.
             </p>
           </div>
 
           <Link
-            href="/platform"
+            href="/medications"
             className="mt-10 inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-3 text-[14px] font-medium text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
           >
-            Discover Platform
+            Explore Drug Database
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

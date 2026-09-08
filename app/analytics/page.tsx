@@ -12,8 +12,8 @@ import { LineChartComponent } from "@/components/charts/LineChart";
 import { PieChartComponent } from "@/components/charts/PieChart";
 import {
   PERFORMANCE_DATA,
-  SUPPLIER_RELIABILITY,
-  PATIENT_AGE_DISTRIBUTION,
+  REVIEW_RELIABILITY,
+  ARTICLES_BY_SPECIALTY,
   SALES_DATA,
 } from "@/lib/constants";
 
@@ -21,9 +21,9 @@ export default function AnalyticsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Analytics</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Insights</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          Detailed analytics and performance metrics
+          Database and lookup analytics
         </p>
       </div>
 
@@ -34,7 +34,7 @@ export default function AnalyticsPage() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <ComparisonBarChart
-          title="Target vs Actual Revenue"
+          title="Coverage vs Target"
           data={PERFORMANCE_DATA}
           dataKey1="target"
           dataKey2="actual"
@@ -42,12 +42,12 @@ export default function AnalyticsPage() {
           name2="Actual"
         />
         <LineChartComponent
-          title="Revenue Trend"
+          title="Lookup Trends"
           data={SALES_DATA}
           xAxisKey="date"
           dataKeys={[
-            { key: "revenue", color: "#6366f1", name: "Revenue" },
-            { key: "orders", color: "#8b5cf6", name: "Orders" },
+            { key: "revenue", color: "#f43f5e", name: "Lookups" },
+            { key: "orders", color: "#fb7185", name: "Saved" },
           ]}
           height={300}
         />
@@ -55,13 +55,13 @@ export default function AnalyticsPage() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <RadialBarChartComponent
-          title="Supplier Reliability"
-          data={SUPPLIER_RELIABILITY}
+          title="Review Reliability"
+          data={REVIEW_RELIABILITY}
           height={350}
         />
         <PieChartComponent
-          title="Patient Age Distribution"
-          data={PATIENT_AGE_DISTRIBUTION}
+          title="Articles by Specialty"
+          data={ARTICLES_BY_SPECIALTY}
           height={350}
           innerRadius={55}
           outerRadius={95}

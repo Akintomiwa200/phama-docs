@@ -38,7 +38,7 @@ export default function SettingsPage() {
               key={item.label}
               className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                 item.active
-                  ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-400"
+                  ? "bg-rose-50 text-rose-700 dark:bg-rose-900/20 dark:text-rose-400"
                   : "text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
               }`}
             >
@@ -68,7 +68,7 @@ export default function SettingsPage() {
                     className={cn(
                       "flex flex-col items-start gap-2 rounded-xl border p-4 text-left transition-colors",
                       isActive
-                        ? "border-indigo-500 bg-indigo-50 dark:border-indigo-400 dark:bg-indigo-900/20"
+                        ? "border-rose-500 bg-rose-50 dark:border-rose-400 dark:bg-rose-900/20"
                         : "border-gray-200 hover:border-gray-300 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-900"
                     )}
                   >
@@ -76,7 +76,7 @@ export default function SettingsPage() {
                       className={cn(
                         "h-5 w-5",
                         isActive
-                          ? "text-indigo-600 dark:text-indigo-400"
+                          ? "text-rose-600 dark:text-rose-400"
                           : "text-gray-500 dark:text-gray-400"
                       )}
                     />
@@ -102,7 +102,7 @@ export default function SettingsPage() {
                 <Input label="First Name" placeholder="Admin" />
                 <Input label="Last Name" placeholder="User" />
               </div>
-              <Input label="Email" type="email" placeholder="admin@pharmdocs.com" />
+              <Input label="Email" type="email" placeholder="admin@metebolme.com" />
               <Input label="Phone" placeholder="+1 (555) 000-0000" />
               <div className="flex justify-end">
                 <Button>Save Changes</Button>
@@ -112,12 +112,12 @@ export default function SettingsPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Pharmacy Information</CardTitle>
-              <CardDescription>Manage your pharmacy details</CardDescription>
+              <CardTitle>Institution Information</CardTitle>
+              <CardDescription>Manage your medical institution details</CardDescription>
             </CardHeader>
             <div className="space-y-4">
-              <Input label="Pharmacy Name" placeholder="PharmDocs Pharmacy" />
-              <Input label="License Number" placeholder="PH-12345" />
+              <Input label="Institution Name" placeholder="Your Medical Institution" />
+              <Input label="Practice License" placeholder="ML-12345" />
               <Input label="Address" placeholder="123 Health Street" />
               <div className="grid gap-4 sm:grid-cols-2">
                 <Input label="City" placeholder="New York" />

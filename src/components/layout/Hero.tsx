@@ -31,7 +31,7 @@ export function Hero() {
           xl:h-[730px] xl:w-[730px]
         "
       >
-        {/* Large soft lavender body */}
+        {/* Large soft pink body */}
         <div
           className="
             absolute inset-0 rounded-full
@@ -43,17 +43,17 @@ export function Hero() {
             background: `
               radial-gradient(
                 circle at 48% 48%,
-                rgba(213, 209, 255, 0.92) 0%,
-                rgba(225, 222, 255, 0.78) 38%,
-                rgba(235, 233, 255, 0.52) 62%,
-                rgba(246, 245, 255, 0.22) 78%,
+                rgba(255, 210, 224, 0.92) 0%,
+                rgba(255, 222, 232, 0.78) 38%,
+                rgba(255, 232, 240, 0.52) 62%,
+                rgba(255, 243, 248, 0.22) 78%,
                 rgba(255, 255, 255, 0) 100%
               )
             `,
           }}
         />
 
-        {/* Blue / violet concentration */}
+        {/* Red / pink concentration */}
         <div
           className="
             absolute
@@ -67,10 +67,10 @@ export function Hero() {
             background: `
               radial-gradient(
                 circle at 48% 50%,
-                rgba(70, 67, 236, 0.86) 0%,
-                rgba(82, 77, 235, 0.66) 22%,
-                rgba(108, 100, 240, 0.30) 48%,
-                rgba(120, 110, 240, 0) 76%
+                rgba(244, 63, 94, 0.9) 0%,
+                rgba(225, 29, 72, 0.6) 22%,
+                rgba(251, 113, 133, 0.30) 48%,
+                rgba(253, 164, 175, 0) 76%
               )
             `,
           }}
@@ -174,17 +174,16 @@ export function Hero() {
               xl:text-[58px]
             "
           >
-            Building Intelligent
+            Your Medical
             <br />
 
-            Systems for{" "}
             <span className="font-[400] text-[#9b9b9f] dark:text-gray-500">
-              Longevity
+              Dictionary,
             </span>
 
             <br />
 
-            Science
+            Library &amp; Database
           </h1>
         </div>
 
@@ -192,11 +191,11 @@ export function Hero() {
             SEARCH
             ======================================================= */}
         <div className="flex flex-1 items-center justify-center pb-16">
-          <div className="flex w-full max-w-lg items-center gap-2 rounded-full border border-gray-200 bg-white/70 p-1.5 pl-4 shadow-xl shadow-indigo-500/5 backdrop-blur-xl transition-colors focus-within:border-indigo-300 dark:border-gray-700 dark:bg-gray-900/70 dark:focus-within:border-indigo-500">
+          <div className="flex w-full max-w-lg items-center gap-2 rounded-full border border-gray-200 bg-white/70 p-1.5 pl-4 shadow-xl shadow-rose-500/5 backdrop-blur-xl transition-colors focus-within:border-rose-300 dark:border-gray-700 dark:bg-gray-900/70 dark:focus-within:border-rose-500">
             <Search className="h-4 w-4 shrink-0 text-gray-400 dark:text-gray-500" />
             <input
               type="text"
-              placeholder="Search drugs, reports and insights..."
+              placeholder="Search 12,000+ medical terms, drugs and articles..."
               className="w-full bg-transparent py-2 text-sm text-gray-900 outline-none placeholder:text-gray-400 dark:text-gray-100 dark:placeholder:text-gray-500"
             />
             <button
@@ -237,13 +236,14 @@ export function Hero() {
               lg:text-[11px]
             "
           >
-            AI-powered neuroscience research integrating optogenetics and
-            chemistry to uncover next-generation therapeutics.
+            A trusted medical dictionary, drug database and library
+            &mdash; every term cross-linked to conditions, symptoms,
+            anatomy and pharmacology.
           </p>
 
           {/* CTA */}
           <Link
-            href="/platform"
+            href="/dashboard"
             className="
               inline-flex
               h-[32px]
@@ -265,7 +265,7 @@ export function Hero() {
               sm:px-[18px]
             "
           >
-            Discover Platform
+            Open the Dictionary
           </Link>
         </div>
       </div>

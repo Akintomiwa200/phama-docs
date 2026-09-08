@@ -44,9 +44,9 @@ export interface SalesData {
 
 export interface InventoryData {
   category: string;
-  inStock: number;
-  lowStock: number;
-  outOfStock: number;
+  complete: number;
+  partial: number;
+  missing: number;
 }
 
 export interface ChartDataPoint {
@@ -56,14 +56,14 @@ export interface ChartDataPoint {
 }
 
 export interface DashboardStats {
-  totalRevenue: number;
-  totalOrders: number;
-  totalPatients: number;
-  totalMedications: number;
-  revenueChange: number;
-  ordersChange: number;
-  patientsChange: number;
-  medicationsChange: number;
+  totalTerms: number;
+  monthlyLookups: number;
+  libraryArticles: number;
+  drugEntries: number;
+  termsChange: number;
+  lookupsChange: number;
+  articlesChange: number;
+  drugsChange: number;
 }
 
 export interface NavItem {

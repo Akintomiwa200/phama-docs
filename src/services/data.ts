@@ -6,8 +6,8 @@ import {
   WEEKLY_TRAFFIC,
   MONTHLY_PRESCRIPTIONS,
   PERFORMANCE_DATA,
-  PATIENT_AGE_DISTRIBUTION,
-  SUPPLIER_RELIABILITY,
+  ARTICLES_BY_SPECIALTY,
+  REVIEW_RELIABILITY,
 } from "@/lib/constants";
 
 export function getSalesData() {
@@ -39,9 +39,9 @@ export function getPerformanceData() {
 }
 
 export function getPatientAgeDistribution() {
-  return PATIENT_AGE_DISTRIBUTION;
+  return ARTICLES_BY_SPECIALTY;
 }
 
 export function getSupplierReliability() {
-  return SUPPLIER_RELIABILITY;
+  return REVIEW_RELIABILITY;
 }

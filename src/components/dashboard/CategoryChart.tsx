@@ -6,7 +6,7 @@ import { PieChartComponent } from "@/components/charts/PieChart";
 export function CategoryChart() {
   return (
     <PieChartComponent
-      title="Category Distribution"
+      title="Terms by Specialty"
       data={CATEGORY_DISTRIBUTION}
       height={300}
       innerRadius={55}

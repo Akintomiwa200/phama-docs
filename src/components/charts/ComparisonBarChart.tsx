@@ -33,7 +33,7 @@ export function ComparisonBarChart({
   name1 = "Target",
   name2 = "Actual",
   color1 = "#cbd5e1",
-  color2 = "#6366f1",
+  color2 = "#f43f5e",
   xAxisKey = "name",
   height = 300,
 }: ComparisonBarChartProps) {

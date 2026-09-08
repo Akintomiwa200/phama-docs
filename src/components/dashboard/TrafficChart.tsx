@@ -6,10 +6,10 @@ import { LineChartComponent } from "@/components/charts/LineChart";
 export function TrafficChart() {
   return (
     <LineChartComponent
-      title="Weekly Traffic"
+      title="Weekly Lookups"
       data={WEEKLY_TRAFFIC}
       xAxisKey="name"
-      dataKeys={[{ key: "value", color: "#06b6d4", name: "Visitors" }]}
+      dataKeys={[{ key: "value", color: "#06b6d4", name: "Lookups" }]}
       height={300}
     />
   );

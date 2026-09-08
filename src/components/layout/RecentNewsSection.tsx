@@ -29,7 +29,7 @@ function RingCluster({ className = "" }: { className?: string }) {
     <div
       className={[
         "relative overflow-hidden rounded-2xl",
-        "bg-[radial-gradient(circle_at_35%_45%,rgba(210,204,255,0.9),rgba(238,236,255,0.5)_60%,rgba(255,255,255,0.2)_85%)]",
+        "bg-[radial-gradient(circle_at_35%_45%,rgba(255,210,222,0.9),rgba(255,240,245,0.5)_60%,rgba(255,255,255,0.2)_85%)]",
         className,
       ].join(" ")}
       aria-hidden
@@ -37,7 +37,7 @@ function RingCluster({ className = "" }: { className?: string }) {
       {rings.map((r, i) => (
         <span
           key={i}
-          className="absolute rounded-full border-[5px] border-white bg-[radial-gradient(circle,rgba(76,63,232,0.85),rgba(76,63,232,0.15)_70%)] shadow-[0_6px_16px_rgba(76,63,232,0.35)]"
+          className="absolute rounded-full border-[5px] border-white bg-[radial-gradient(circle,rgba(244,63,94,0.85),rgba(244,63,94,0.15)_70%)] shadow-[0_6px_16px_rgba(244,63,94,0.35)]"
           style={{
             top: r.top,
             left: r.left,
@@ -62,11 +62,11 @@ type Article = {
 };
 
 const FEATURED: Article = {
-  title: "AI-powered systems for managing complex cognitive workflows",
+  title: "Introducing the cross-linked medical dictionary",
   excerpt:
-    "In this milestone release, we introduce a neuroscience-driven AI platform designed to handle complex cognitive and decision-making scenarios with precision and speed.",
+    "In this milestone release we launch a fully cross-linked medical dictionary — every term connects to its conditions, symptoms, drugs and anatomy in one navigable knowledge graph.",
   date: "15 December, 2025",
-  href: "/news/ai-powered-systems",
+  href: "/news/cross-linked-dictionary",
 };
 
 // NOTE: the reference screenshot is cropped right where these three cards'
@@ -74,20 +74,20 @@ const FEATURED: Article = {
 // text below is placeholder; swap in the real copy once you have it.
 const MORE_ARTICLES: Article[] = [
   {
-    title: "Add this article's title",
-    excerpt: "Add this article's excerpt here.",
+    title: "New monographs: cardiology & neurology expansion",
+    excerpt: "Over 120 new drug monographs added across cardiology and neurology, fully reviewed and cross-checked.",
     date: "26 November, 2025",
     href: "/news/article-2",
   },
   {
-    title: "Add this article's title",
-    excerpt: "Add this article's excerpt here.",
+    title: "Expanded coverage: 400 new drug interactions",
+    excerpt: "The drug database now covers 400 additional interaction pairs, mapped to severity and management notes.",
     date: "20 November, 2025",
     href: "/news/article-3",
   },
   {
-    title: "Add this article's title",
-    excerpt: "Add this article's excerpt here.",
+    title: "Library adds 60 open-access references",
+    excerpt: "Sixty new open-access guideline and reference documents are now available in the medical library.",
     date: "17 October, 2025",
     href: "/news/article-4",
   },
@@ -100,7 +100,7 @@ export function RecentNewsSection() {
         {/* Header row */}
         <div className="flex items-center justify-between border-b border-gray-200 px-4 py-6 dark:border-gray-800 sm:px-6 lg:px-8">
           <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-            Recent News
+            Latest from the Medical Library
           </h2>
           <Link
             href="/news"

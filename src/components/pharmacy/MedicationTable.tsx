@@ -19,18 +19,18 @@ export function MedicationTable() {
     <Card padding={false}>
       <CardHeader className="px-6 pt-6">
         <div className="flex items-center justify-between">
-          <CardTitle>Medications</CardTitle>
-          <Button size="sm">Add Medication</Button>
+          <CardTitle>Drug Database</CardTitle>
+          <Button size="sm">Add Drug</Button>
         </div>
       </CardHeader>
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
-            <TableHead>Category</TableHead>
+            <TableHead>Class</TableHead>
             <TableHead>Dosage</TableHead>
             <TableHead>Price</TableHead>
-            <TableHead>Stock</TableHead>
+            <TableHead>Availability</TableHead>
             <TableHead>Expiry</TableHead>
             <TableHead>Manufacturer</TableHead>
           </TableRow>

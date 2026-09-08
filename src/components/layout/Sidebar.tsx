@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  LayoutDashboard,
-  BarChart3,
+  BookOpen,
   Pill,
   FileText,
+  BarChart3,
   Settings,
   ChevronLeft,
 } from "lucide-react";
@@ -14,10 +14,10 @@ import { cn } from "@/lib/helpers";
 import { useState } from "react";
 
 const SIDEBAR_ITEMS = [
-  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Analytics", href: "/analytics", icon: BarChart3 },
-  { label: "Medications", href: "/medications", icon: Pill },
-  { label: "Reports", href: "/reports", icon: FileText },
+  { label: "Dictionary", href: "/dashboard", icon: BookOpen },
+  { label: "Drugs", href: "/medications", icon: Pill },
+  { label: "Library", href: "/reports", icon: FileText },
+  { label: "Insights", href: "/analytics", icon: BarChart3 },
   { label: "Settings", href: "/settings", icon: Settings },
 ];
 
@@ -44,7 +44,7 @@ export function Sidebar() {
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                   isActive
-                    ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-400"
+                    ? "bg-rose-50 text-rose-700 dark:bg-rose-900/20 dark:text-rose-400"
                     : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
                 )}
               >
