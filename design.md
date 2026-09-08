@@ -1,4 +1,4 @@
-# Metebolme — Design System
+# African Metabolome Database (AMDB) — Design System
 
 The design language used by the homepage (and app shell) so every new page ships
 with the same look. Components referenced here already exist — reuse them, don't
@@ -8,11 +8,13 @@ reinvent.
 
 ## 1. Brand & Voice
 
-- **Name:** Metebolme
-- **What it is:** a medical dictionary, library and database.
-  Headlines frame the three pillars: *dictionary*, *drug database*, *library*.
-- **Tone:** clear, trustworthy, plain‑language. Avoid AI/neuroscience jargon
-  (that was an earlier brand direction and is gone).
+- **Name:** African Metabolome Database (AMDB)
+- **What it is:** a multi-domain metabolomics platform for Africa — integrating
+  plant, agricultural, livestock, environmental, and human metabolomics.
+  Headlines frame the pillars: *Biological Domains*, *Metabolites & Spectra*,
+  *Data Repositories*, *Analytical Bio-Map*, *Metadata & DOIs*.
+- **Tone:** clear, trustworthy, scientific, plain‑language. Avoid medical/pharma
+  and AI/neuroscience jargon — those earlier brand directions are gone.
 - **Emphasis trick:** on the hero, one word of a headline is de‑emphasized
   (lighter weight + muted color) rather than highlighted — see Hero.
 
@@ -148,9 +150,12 @@ Reference: `app/dashboard/page.tsx`, `app/medications/page.tsx`,
 
 ## 10. Data Layer
 
-- **Domain vocabulary** (use in copy): terms / drug entries / monographs /
-  library documents / specialties (Cardiology, Neurology, Oncology,
-  Endocrinology, Infectious Diseases, Pulmonology) / lookups / saved entries.
+- **Domain vocabulary** (use in copy): biological domains (Plant, Agricultural,
+  Livestock, Environmental, Human Metabolomics) / metabolites & bioactives /
+  reference spectra / processed feature tables / annotation data / biological
+  metadata (species, tissue, geographic origin) / LC-MS/MS · GC-MS · NMR /
+  public repositories (MetaboLights, GNPS, Metabolomics Workbench) / DOIs &
+  contributor attribution.
 - Domain data is centralized, typed, imported from `@/lib/constants` and wrapped
   again by `src/services/data.ts` getters — add new data there, not inline in pages.
 - Keep chart data `object[]` with `fill?`; array shapes must match the chart
@@ -161,7 +166,7 @@ Reference: `app/dashboard/page.tsx`, `app/medications/page.tsx`,
 1. Every element ships a `dark:` twin; use the `.dark`-class system, never
    `prefers-color-scheme` alone.
 2. Reuse the kit (`Button/Card/Badge/Table/…`) and chart wrappers.
-3. Say "dictionary/library/drug database" — the old pharma‑ops and
-   neuroscience wording is retired.
+3. Say "African Metabolome Database / multi-domain metabolomics" — the old
+   medical, pharma‑ops, and neuroscience wording is retired.
 4. Copy UI copy into `src/lib/constants.ts` when a page needs data.
 5. After building a page, run `pnpm run lint` and `pnpm run build`.

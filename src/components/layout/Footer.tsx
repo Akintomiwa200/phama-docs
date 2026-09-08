@@ -1,18 +1,18 @@
 import Link from "next/link";
 
 const platformLinks = [
-  { label: "Platform", href: "/platform" },
-  { label: "Company", href: "/company" },
-  { label: "Research Lab", href: "/research" },
-  { label: "Journey", href: "/journey" },
-  { label: "News", href: "/news" },
+  { label: "Domains Hub", href: "/dashboard" },
+  { label: "Metabolites & Spectra", href: "/medications" },
+  { label: "Data Repositories", href: "/reports" },
+  { label: "Analytical Bio-Map", href: "/analytics" },
+  { label: "Metadata & DOIs", href: "/settings" },
 ];
 
 const socialLinks = [
-  { label: "LinkedIn", href: "#" },
-  { label: "Twitter (X)", href: "#" },
-  { label: "Medium", href: "#" },
-  { label: "YouTube", href: "#" },
+  { label: "MetaboLights", href: "https://www.ebi.ac.uk/metabolights/" },
+  { label: "GNPS Social", href: "https://gnps.ucsd.edu/" },
+  { label: "Metabolomics Workbench", href: "https://www.metabolomicsworkbench.org/" },
+  { label: "Zenodo AMDB Node", href: "#" },
 ];
 
 export function Footer() {
@@ -30,10 +30,7 @@ export function Footer() {
         lg:h-[530px]
       "
     >
-      {/* =====================================================
-          FIGMA BACKGROUND GLOW
-          ===================================================== */}
-
+      {/* FIGMA BACKGROUND GLOW */}
       <div
         aria-hidden="true"
         className="
@@ -52,46 +49,7 @@ export function Footer() {
         }}
       />
 
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          left-[28%]
-          top-[30%]
-          h-[360px]
-          w-[650px]
-          rounded-full
-          blur-[120px]
-        "
-        style={{
-          background:
-            "radial-gradient(ellipse, rgba(255,170,200,0.46) 0%, rgba(255,170,200,0.22) 42%, rgba(255,170,200,0) 75%)",
-        }}
-      />
-
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          right-[2%]
-          top-[2%]
-          h-[400px]
-          w-[500px]
-          rounded-full
-          blur-[110px]
-        "
-        style={{
-          background:
-            "radial-gradient(ellipse, rgba(255,230,238,0.62) 0%, rgba(255,230,238,0) 72%)",
-        }}
-      />
-
-      {/* =====================================================
-          MAIN CONTENT
-          ===================================================== */}
-
+      {/* MAIN CONTENT */}
       <div
         className="
           relative
@@ -113,34 +71,31 @@ export function Footer() {
             justify-between
           "
         >
-          {/* =================================================
-              LEFT CONTENT
-              ================================================= */}
-
-          <div className="w-[390px]">
+          {/* LEFT CONTENT */}
+          <div className="w-[410px]">
             <h2
               className="
                 m-0
-                max-w-[390px]
-                text-[27px]
+                max-w-[410px]
+                text-[25px]
                 font-[600]
-                leading-[1.02]
+                leading-[1.05]
                 tracking-[-0.055em]
                 text-[#090909]
                 dark:text-gray-100
-                sm:text-[28px]
-                lg:text-[30px]
+                sm:text-[27px]
+                lg:text-[29px]
               "
             >
-              We are building a complete medical dictionary,
+              Building a unified multi-domain
               <br />
-              drug database and library for students,
+              metabolomics platform for African
               <br />
-              clinicians and patients.
+              plants, crops, livestock, &amp; health.
             </h2>
 
             <Link
-              href="/contact"
+              href="/reports"
               className="
                 mt-[30px]
                 inline-flex
@@ -161,14 +116,11 @@ export function Footer() {
                 hover:bg-black
               "
             >
-              Let&apos;s connect
+              Submit Data &amp; Claim DOI
             </Link>
           </div>
 
-          {/* =================================================
-              RIGHT NAVIGATION
-              ================================================= */}
-
+          {/* RIGHT NAVIGATION */}
           <div
             className="
               flex
@@ -177,7 +129,6 @@ export function Footer() {
             "
           >
             {/* Platform */}
-
             <nav aria-label="Footer navigation">
               <ul className="m-0 list-none space-y-[14px] p-0">
                 {platformLinks.map((link) => (
@@ -204,14 +155,15 @@ export function Footer() {
               </ul>
             </nav>
 
-            {/* Social */}
-
-            <nav aria-label="Social links">
+            {/* Repositories */}
+            <nav aria-label="Repository links">
               <ul className="m-0 list-none space-y-[14px] p-0">
                 {socialLinks.map((link) => (
                   <li key={link.label}>
-                    <Link
+                    <a
                       href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="
                         block
                         whitespace-nowrap
@@ -227,7 +179,7 @@ export function Footer() {
                       "
                     >
                       {link.label}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -236,10 +188,7 @@ export function Footer() {
         </div>
       </div>
 
-      {/* =====================================================
-          LARGE METEBOLME WORDMARK
-          ===================================================== */}
-
+      {/* LARGE AMDB WORDMARK */}
       <div
         aria-hidden="true"
         className="
@@ -256,7 +205,7 @@ export function Footer() {
         <span
           className="
             block
-            text-[17vw]
+            text-[16vw]
             font-[500]
             leading-[0.72]
             tracking-[-0.085em]
@@ -264,8 +213,8 @@ export function Footer() {
             dark:text-gray-900
           "
         >
-          Metebol
-          <span className="tracking-[-0.11em]">me</span>
+          Metabol
+          <span className="tracking-[-0.11em]">ome</span>
         </span>
       </div>
     </footer>

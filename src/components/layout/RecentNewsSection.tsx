@@ -1,17 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-// No extra libraries needed — Link + lucide-react's ArrowRight, same as
-// the rest of the page. The featured-article artwork (the cluster of
-// glossy blue/violet rings) is almost certainly a real rendered/exported
-// image asset in the source Figma file — a soft, high-detail 3D render
-// like that isn't practical to fully reproduce in CSS. `RingCluster` below
-// is a CSS approximation (layered, blurred radial-gradient rings) to hold
-// the space and get the right color/mood; swap it for a Next <Image>
-// pointing at the real export as soon as you have it:
-//
-//   <Image src="/news/featured.png" alt="" fill className="object-cover" />
-
 function RingCluster({ className = "" }: { className?: string }) {
   const rings = [
     { top: "18%", left: "22%", size: 34, opacity: 0.9 },
@@ -48,48 +37,49 @@ function RingCluster({ className = "" }: { className?: string }) {
           }}
         />
       ))}
-      {/* soft overall haze to blend the rings together like the reference */}
       <div className="absolute inset-0 backdrop-blur-[1px]" />
     </div>
   );
 }
 
-type Article = {
+type DatasetNews = {
   title: string;
   excerpt: string;
   date: string;
+  doi: string;
   href: string;
 };
 
-const FEATURED: Article = {
-  title: "Introducing the cross-linked medical dictionary",
+const FEATURED_DATASET: DatasetNews = {
+  title: "Data Publication & Contributor Attribution Framework",
   excerpt:
-    "In this milestone release we launch a fully cross-linked medical dictionary — every term connects to its conditions, symptoms, drugs and anatomy in one navigable knowledge graph.",
-  date: "15 December, 2025",
-  href: "/news/cross-linked-dictionary",
+    "Community contributions receive persistent identifiers (DOIs), contributor metadata, institutional affiliation, and recommended citation formats — granting researchers formal scholarly credit for uploading feature tables, spectral data, and metadata.",
+  date: "Data Framework 2026",
+  doi: "10.5281/zenodo.AMDB-2026-PUB",
+  href: "/reports",
 };
 
-// NOTE: the reference screenshot is cropped right where these three cards'
-// titles/excerpts would start — only the dates are visible. Title/excerpt
-// text below is placeholder; swap in the real copy once you have it.
-const MORE_ARTICLES: Article[] = [
+const REPOSITORY_SOURCES: DatasetNews[] = [
   {
-    title: "New monographs: cardiology & neurology expansion",
-    excerpt: "Over 120 new drug monographs added across cardiology and neurology, fully reviewed and cross-checked.",
-    date: "26 November, 2025",
-    href: "/news/article-2",
+    title: "Public Metabolomics Repositories Integration",
+    excerpt: "Integrating open analytical datasets from MetaboLights, Metabolomics Workbench, and GNPS.",
+    date: "Public Repos",
+    doi: "MetaboLights & GNPS",
+    href: "/reports",
   },
   {
-    title: "Expanded coverage: 400 new drug interactions",
-    excerpt: "The drug database now covers 400 additional interaction pairs, mapped to severity and management notes.",
-    date: "20 November, 2025",
-    href: "/news/article-3",
+    title: "Literature-Derived Phytochemical Curation",
+    excerpt: "Extracting reference metabolite data from published studies on African medicinal flora & staple crops.",
+    date: "Literature Data",
+    doi: "Curated Literature DB",
+    href: "/reports",
   },
   {
-    title: "Library adds 60 open-access references",
-    excerpt: "Sixty new open-access guideline and reference documents are now available in the medical library.",
-    date: "17 October, 2025",
-    href: "/news/article-4",
+    title: "Newly Generated Research Collaborations",
+    excerpt: "Institutional partnerships, funded projects, and government programs expanding dataset depth across Africa.",
+    date: "New Datasets",
+    doi: "AMDB Partner Datasets",
+    href: "/reports",
   },
 ];
 
@@ -100,13 +90,13 @@ export function RecentNewsSection() {
         {/* Header row */}
         <div className="flex items-center justify-between border-b border-gray-200 px-4 py-6 dark:border-gray-800 sm:px-6 lg:px-8">
           <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-            Latest from the Medical Library
+            Data Sources &amp; Scholarly Publication Framework
           </h2>
           <Link
-            href="/news"
+            href="/reports"
             className="inline-flex items-center gap-1.5 rounded-full border border-gray-300 px-4 py-2 text-[13px] font-medium text-gray-900 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:text-gray-100 dark:hover:bg-gray-900"
           >
-            View all
+            Submit Data &amp; DOI
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
@@ -116,39 +106,47 @@ export function RecentNewsSection() {
           <RingCluster className="h-64 w-full sm:h-72" />
 
           <div className="flex flex-col justify-center gap-4">
+            <span className="text-xs font-semibold uppercase tracking-wider text-rose-600 dark:text-rose-400">
+              {FEATURED_DATASET.doi}
+            </span>
             <h3 className="max-w-md text-xl font-bold leading-snug text-gray-900 dark:text-gray-100 sm:text-2xl">
-              {FEATURED.title}
+              {FEATURED_DATASET.title}
             </h3>
             <p className="max-w-md text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-              {FEATURED.excerpt}
+              {FEATURED_DATASET.excerpt}
             </p>
 
             <div className="mt-6 flex items-center justify-between">
               <span className="text-xs text-gray-500 dark:text-gray-400">
-                {FEATURED.date}
+                {FEATURED_DATASET.date}
               </span>
               <Link
-                href={FEATURED.href}
+                href={FEATURED_DATASET.href}
                 className="inline-flex items-center gap-1 text-xs font-medium text-gray-900 underline underline-offset-2 dark:text-gray-100"
               >
-                Read more
+                Upload &amp; Get DOI
                 <ArrowRight className="h-3 w-3" />
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Secondary articles row */}
+        {/* Secondary sources row */}
         <div className="grid grid-cols-1 divide-y divide-gray-200 dark:divide-gray-800 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-          {MORE_ARTICLES.map((article) => (
+          {REPOSITORY_SOURCES.map((article) => (
             <Link
-              key={article.href}
+              key={article.title}
               href={article.href}
               className="flex flex-col gap-3 px-4 py-8 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900 sm:px-6 lg:px-8"
             >
-              <span className="text-xs text-gray-500 dark:text-gray-400">
-                {article.date}
-              </span>
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-medium text-rose-500">
+                  {article.doi}
+                </span>
+                <span className="text-[11px] text-gray-400">
+                  {article.date}
+                </span>
+              </div>
               <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                 {article.title}
               </h4>

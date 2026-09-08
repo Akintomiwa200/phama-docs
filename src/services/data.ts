@@ -8,7 +8,18 @@ import {
   PERFORMANCE_DATA,
   ARTICLES_BY_SPECIALTY,
   REVIEW_RELIABILITY,
+  SEARCH_INDEX,
 } from "@/lib/constants";
+import type { SearchItem } from "@/lib/types";
+import { searchIndex } from "@/lib/search";
+
+export function getSearchIndex() {
+  return SEARCH_INDEX;
+}
+
+export function getSearchResults(query: string, limit = 8): SearchItem[] {
+  return searchIndex(query, limit);
+}
 
 export function getSalesData() {
   return SALES_DATA;

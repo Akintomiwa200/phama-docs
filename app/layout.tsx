@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Metebolme - Medical Dictionary, Library & Database",
+  title: "African Metabolome Database - Multi-Domain Metabolomics Platform",
   description:
-    "A comprehensive medical dictionary, drug database and curated medical library.",
+    "A multi-domain African metabolomics platform integrating plant, agricultural, livestock, environmental, and human metabolome data with spectral libraries, processed feature tables, and citable datasets.",
   icons: {
     icon: "/icon.svg",
   },

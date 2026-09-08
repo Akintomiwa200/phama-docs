@@ -1,4 +1,3 @@
-
 import React from "react";
 
 export function DecodeSignalsSection() {
@@ -36,10 +35,7 @@ export function DecodeSignalsSection() {
             overflow-visible
           "
         >
-          {/* -----------------------------------------------------
-              Soft outer glow
-              ----------------------------------------------------- */}
-
+          {/* Soft outer glow */}
           <div
             aria-hidden="true"
             className="
@@ -56,10 +52,7 @@ export function DecodeSignalsSection() {
             }}
           />
 
-          {/* -----------------------------------------------------
-              SVG shape
-              ----------------------------------------------------- */}
-
+          {/* SVG shape */}
           <svg
             viewBox="0 0 1000 500"
             className="
@@ -73,8 +66,6 @@ export function DecodeSignalsSection() {
             aria-hidden="true"
           >
             <defs>
-              {/* Main gradient */}
-
               <linearGradient
                 id="neuro-panel-gradient"
                 x1="0%"
@@ -82,33 +73,12 @@ export function DecodeSignalsSection() {
                 x2="100%"
                 y2="50%"
               >
-                <stop
-                  offset="0%"
-                  stopColor="#fff0f2"
-                />
-
-                <stop
-                  offset="35%"
-                  stopColor="#ffd8e0"
-                />
-
-                <stop
-                  offset="62%"
-                  stopColor="#ffa3b3"
-                />
-
-                <stop
-                  offset="82%"
-                  stopColor="#f75f78"
-                />
-
-                <stop
-                  offset="100%"
-                  stopColor="#e11d48"
-                />
+                <stop offset="0%" stopColor="#fff0f2" />
+                <stop offset="35%" stopColor="#ffd8e0" />
+                <stop offset="62%" stopColor="#ffa3b3" />
+                <stop offset="82%" stopColor="#f75f78" />
+                <stop offset="100%" stopColor="#e11d48" />
               </linearGradient>
-
-              {/* Bottom/left soft light */}
 
               <radialGradient
                 id="neuro-panel-light"
@@ -116,26 +86,10 @@ export function DecodeSignalsSection() {
                 cy="78%"
                 r="70%"
               >
-                <stop
-                  offset="0%"
-                  stopColor="#ffffff"
-                  stopOpacity="0.48"
-                />
-
-                <stop
-                  offset="55%"
-                  stopColor="#ffffff"
-                  stopOpacity="0.10"
-                />
-
-                <stop
-                  offset="100%"
-                  stopColor="#ffffff"
-                  stopOpacity="0"
-                />
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.48" />
+                <stop offset="55%" stopColor="#ffffff" stopOpacity="0.10" />
+                <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
               </radialGradient>
-
-              {/* Right red light */}
 
               <radialGradient
                 id="neuro-panel-purple"
@@ -143,26 +97,10 @@ export function DecodeSignalsSection() {
                 cy="50%"
                 r="65%"
               >
-                <stop
-                  offset="0%"
-                  stopColor="#e11d48"
-                  stopOpacity="0.95"
-                />
-
-                <stop
-                  offset="45%"
-                  stopColor="#fb7185"
-                  stopOpacity="0.50"
-                />
-
-                <stop
-                  offset="100%"
-                  stopColor="#fda4af"
-                  stopOpacity="0"
-                />
+                <stop offset="0%" stopColor="#e11d48" stopOpacity="0.95" />
+                <stop offset="45%" stopColor="#fb7185" stopOpacity="0.50" />
+                <stop offset="100%" stopColor="#fda4af" stopOpacity="0" />
               </radialGradient>
-
-              {/* Soft inner highlight */}
 
               <linearGradient
                 id="neuro-panel-highlight"
@@ -171,26 +109,10 @@ export function DecodeSignalsSection() {
                 x2="0%"
                 y2="100%"
               >
-                <stop
-                  offset="0%"
-                  stopColor="#ffffff"
-                  stopOpacity="0.20"
-                />
-
-                <stop
-                  offset="50%"
-                  stopColor="#ffffff"
-                  stopOpacity="0"
-                />
-
-                <stop
-                  offset="100%"
-                  stopColor="#ffffff"
-                  stopOpacity="0.10"
-                />
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.20" />
+                <stop offset="50%" stopColor="#ffffff" stopOpacity="0" />
+                <stop offset="100%" stopColor="#ffffff" stopOpacity="0.10" />
               </linearGradient>
-
-              {/* Shape shadow */}
 
               <filter
                 id="neuro-panel-shadow"
@@ -208,143 +130,50 @@ export function DecodeSignalsSection() {
                 />
               </filter>
 
-              {/* Clip shape */}
-
               <clipPath id="neuro-panel-clip">
                 <path
                   d="
-                    M 105 55
-
-                    H 610
-
-                    C 625 55
-                      635 65
-                      635 80
-
-                    V 118
-
-                    C 635 133
-                      645 143
-                      660 143
-
-                    H 674
-
-                    C 690 143
-                      700 153
-                      700 168
-
-                    C 700 183
-                      710 193
-                      725 193
-
-                    C 740 193
-                      750 183
-                      750 168
-
-                    V 82
-
-                    C 750 66
-                      760 55
-                      777 55
-
-                    H 850
-
-                    C 875 55
-                      892 72
-                      892 97
-
-                    V 402
-
-                    C 892 427
-                      875 445
-                      850 445
-
-                    H 777
-
-                    C 760 445
-                      750 434
-                      750 418
-
-                    V 383
-
-                    C 750 368
-                      740 358
-                      725 358
-
-                    C 710 358
-                      700 368
-                      700 383
-
-                    C 700 398
-                      690 408
-                      674 408
-
-                    H 660
-
-                    C 645 408
-                      635 398
-                      635 383
-
-                    V 420
-
-                    C 635 436
-                      624 445
-                      608 445
-
-                    H 105
-
-                    C 80 445
-                      62 427
-                      62 402
-
-                    V 98
-
-                    C 62 73
-                      80 55
-                      105 55
-
-                    Z
+                    M 105 55 H 610
+                    C 625 55 635 65 635 80 V 118
+                    C 635 133 645 143 660 143 H 674
+                    C 690 143 700 153 700 168
+                    C 700 183 710 193 725 193
+                    C 740 193 750 183 750 168 V 82
+                    C 750 66 760 55 777 55 H 850
+                    C 875 55 892 72 892 97 V 402
+                    C 892 427 875 445 850 445 H 777
+                    C 760 445 750 434 750 418 V 383
+                    C 750 368 740 358 725 358
+                    C 710 358 700 368 700 383
+                    C 700 398 690 408 674 408 H 660
+                    C 645 408 635 398 635 383 V 420
+                    C 635 436 624 445 608 445 H 105
+                    C 80 445 62 427 62 402 V 98
+                    C 62 73 80 55 105 55 Z
                   "
                 />
               </clipPath>
             </defs>
 
-            {/* ===================================================
-                OUTER WHITE BORDER
-                =================================================== */}
-
             <path
               d="
-                M 105 55
-                H 610
-                C 625 55 635 65 635 80
-                V 118
-                C 635 133 645 143 660 143
-                H 674
+                M 105 55 H 610
+                C 625 55 635 65 635 80 V 118
+                C 635 133 645 143 660 143 H 674
                 C 690 143 700 153 700 168
                 C 700 183 710 193 725 193
-                C 740 193 750 183 750 168
-                V 82
-                C 750 66 760 55 777 55
-                H 850
-                C 875 55 892 72 892 97
-                V 402
-                C 892 427 875 445 850 445
-                H 777
-                C 760 445 750 434 750 418
-                V 383
+                C 740 193 750 183 750 168 V 82
+                C 750 66 760 55 777 55 H 850
+                C 875 55 892 72 892 97 V 402
+                C 892 427 875 445 850 445 H 777
+                C 760 445 750 434 750 418 V 383
                 C 750 368 740 358 725 358
                 C 710 358 700 368 700 383
-                C 700 398 690 408 674 408
-                H 660
-                C 645 408 635 398 635 383
-                V 420
-                C 635 436 624 445 608 445
-                H 105
-                C 80 445 62 427 62 402
-                V 98
-                C 62 73 80 55 105 55
-                Z
+                C 700 398 690 408 674 408 H 660
+                C 645 408 635 398 635 383 V 420
+                C 635 436 624 445 608 445 H 105
+                C 80 445 62 427 62 402 V 98
+                C 62 73 80 55 105 55 Z
               "
               fill="url(#neuro-panel-gradient)"
               stroke="rgba(247,246,255,0.98)"
@@ -353,72 +182,31 @@ export function DecodeSignalsSection() {
               filter="url(#neuro-panel-shadow)"
             />
 
-            {/* ===================================================
-                LIGHT OVERLAY
-                =================================================== */}
-
             <g clipPath="url(#neuro-panel-clip)">
-              <rect
-                x="40"
-                y="35"
-                width="880"
-                height="430"
-                fill="url(#neuro-panel-light)"
-              />
-
-              <rect
-                x="40"
-                y="35"
-                width="880"
-                height="430"
-                fill="url(#neuro-panel-purple)"
-              />
-
-              <rect
-                x="40"
-                y="35"
-                width="880"
-                height="430"
-                fill="url(#neuro-panel-highlight)"
-              />
+              <rect x="40" y="35" width="880" height="430" fill="url(#neuro-panel-light)" />
+              <rect x="40" y="35" width="880" height="430" fill="url(#neuro-panel-purple)" />
+              <rect x="40" y="35" width="880" height="430" fill="url(#neuro-panel-highlight)" />
             </g>
-
-            {/* ===================================================
-                INNER WHITE EDGE
-                =================================================== */}
 
             <path
               d="
-                M 105 55
-                H 610
-                C 625 55 635 65 635 80
-                V 118
-                C 635 133 645 143 660 143
-                H 674
+                M 105 55 H 610
+                C 625 55 635 65 635 80 V 118
+                C 635 133 645 143 660 143 H 674
                 C 690 143 700 153 700 168
                 C 700 183 710 193 725 193
-                C 740 193 750 183 750 168
-                V 82
-                C 750 66 760 55 777 55
-                H 850
-                C 875 55 892 72 892 97
-                V 402
-                C 892 427 875 445 850 445
-                H 777
-                C 760 445 750 434 750 418
-                V 383
+                C 740 193 750 183 750 168 V 82
+                C 750 66 760 55 777 55 H 850
+                C 875 55 892 72 892 97 V 402
+                C 892 427 875 445 850 445 H 777
+                C 760 445 750 434 750 418 V 383
                 C 750 368 740 358 725 358
                 C 710 358 700 368 700 383
-                C 700 398 690 408 674 408
-                H 660
-                C 645 408 635 398 635 383
-                V 420
-                C 635 436 624 445 608 445
-                H 105
-                C 80 445 62 427 62 402
-                V 98
-                C 62 73 80 55 105 55
-                Z
+                C 700 398 690 408 674 408 H 660
+                C 645 408 635 398 635 383 V 420
+                C 635 436 624 445 608 445 H 105
+                C 80 445 62 427 62 402 V 98
+                C 62 73 80 55 105 55 Z
               "
               fill="none"
               stroke="rgba(255,255,255,0.94)"
@@ -427,17 +215,14 @@ export function DecodeSignalsSection() {
             />
           </svg>
 
-          {/* =====================================================
-              TEXT
-              ===================================================== */}
-
+          {/* TEXT */}
           <div
             className="
               absolute
               left-[13%]
               top-1/2
               z-20
-              w-[56%]
+              w-[60%]
               -translate-y-1/2
             "
           >
@@ -445,22 +230,19 @@ export function DecodeSignalsSection() {
               className="
                 m-0
                 max-w-[620px]
-                text-[18px]
+                text-[17px]
                 font-[400]
-                leading-[1.22]
+                leading-[1.28]
                 tracking-[-0.035em]
                 text-white
-                sm:text-[20px]
-                lg:text-[22px]
+                sm:text-[19px]
+                lg:text-[21px]
               "
             >
-              The human body is a complex system of
-              <br />
-              interconnected terms and concepts. Our
-              <br />
-              dictionary cross-links every entry &mdash;
-              <br />
-              conditions, symptoms, drugs and anatomy.
+              The African Metabolome Database is designed as a multi-domain
+              metabolomics platform — integrating plants, animals, crops,
+              microbes, and environments to map the interconnected biochemical
+              ecosystems of Africa.
             </p>
           </div>
         </div>

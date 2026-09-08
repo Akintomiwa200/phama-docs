@@ -1,37 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# African Metabolome Database (AMDB)
 
-## Getting Started
+The **African Metabolome Database (AMDB)** is a multi-domain metabolomics platform designed to capture the interconnected nature of ecosystems across Africa.
 
-First, run the development server:
+Rather than focusing exclusively on human metabolomics, the database integrates five biological domains to provide a biochemical map of interactions across plants, animals, humans, microbes, and environments.
+
+---
+
+## 1. Major Biological Domains
+
+- **Plant Metabolomics:** Medicinal plants, agricultural crops, wild plant biodiversity, and phytochemical structural diversity.
+- **Agricultural Metabolomics:** Crop stress responses (drought, salinity), plant-microbe rhizosphere interactions, soil metabolic signatures, crop quality & yield indicators.
+- **Livestock Metabolomics:** Metabolic indicators of indigenous animal health, feed metabolite composition, growth & productivity biomarkers.
+- **Environmental Metabolomics:** Soil metabolomes, aquatic ecosystems (lakes, rivers), and microbial environmental chemistry.
+- **Human Metabolomics (Later Phases):** Disease biomarkers, nutritional metabolomics, microbiome-host metabolic interactions, precision health monitoring.
+
+---
+
+## 2. Core Data Types
+
+1. **Primary Analytical Data:** Raw LC-MS/MS, GC-MS, and NMR spectroscopy parameters (m/z ratios, retention times, fragmentation patterns, signal intensities).
+2. **Processed Feature Tables:** Aligned peak matrices across biological samples.
+3. **Spectral Reference Data:** MS/MS fragmentation and NMR reference spectral libraries.
+4. **Annotation Data:** Compound formulas, structures, database identifiers (MetaboLights, GNPS, PubChem), and probabilistic confidence scores.
+5. **Biological Metadata:** Contextual metadata including species taxonomy, tissue type, geographic origin, environmental conditions, sample collection, and storage protocols.
+
+---
+
+## 3. Data Sources & DOI Publication Framework
+
+- **Public Repositories:** MetaboLights, Metabolomics Workbench, GNPS.
+- **Literature Curation:** Phytochemical analyses of African flora and crops.
+- **Community Contributions & DOIs:** Data publication framework assigning persistent DOIs (e.g. `10.5281/zenodo.AMDB-...`), author attribution, and citation strings for contributed feature tables and spectral datasets.
+
+---
+
+## 4. Getting Started
+
+Run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run build & lint checks:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# phama-docs" 
+```bash
+pnpm run lint
+pnpm run build
+```

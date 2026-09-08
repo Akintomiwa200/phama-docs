@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, Search, Library, Pill } from "lucide-react";
+import { Leaf, Search, Database, Activity } from "lucide-react";
 import { StatCard } from "@/components/ui/StatCard";
 import { DASHBOARD_STATS } from "@/lib/constants";
 import { formatNumber } from "@/lib/helpers";
@@ -11,28 +11,28 @@ export function StatsOverview() {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <StatCard
-        title="Terms in Dictionary"
+        title="Annotated Metabolites"
         value={formatNumber(stats.totalTerms)}
         change={stats.termsChange}
-        icon={<BookOpen className="h-5 w-5 text-rose-600" />}
+        icon={<Leaf className="h-5 w-5 text-rose-600" />}
       />
       <StatCard
-        title="Lookups This Month"
+        title="Monthly Spectral Lookups"
         value={formatNumber(stats.monthlyLookups)}
         change={stats.lookupsChange}
         icon={<Search className="h-5 w-5 text-rose-600" />}
       />
       <StatCard
-        title="Library Articles"
+        title="Citable Datasets & DOIs"
         value={formatNumber(stats.libraryArticles)}
         change={stats.articlesChange}
-        icon={<Library className="h-5 w-5 text-rose-600" />}
+        icon={<Database className="h-5 w-5 text-rose-600" />}
       />
       <StatCard
-        title="Drug Entries"
+        title="Reference Spectral Libraries"
         value={formatNumber(stats.drugEntries)}
         change={stats.drugsChange}
-        icon={<Pill className="h-5 w-5 text-rose-600" />}
+        icon={<Activity className="h-5 w-5 text-rose-600" />}
       />
     </div>
   );

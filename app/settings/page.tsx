@@ -3,9 +3,10 @@
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { Badge } from "@/components/ui/Badge";
 import { useTheme } from "@/components/layout/ThemeProvider";
 import { cn } from "@/lib/helpers";
-import { User, Bell, Shield, Store, Sun, Moon, Monitor } from "lucide-react";
+import { User, Shield, Sun, Moon, Monitor, Database, Award, CheckCircle2 } from "lucide-react";
 
 const THEME_OPTIONS = [
   { value: "system", label: "System", icon: Monitor, hint: "Follow browser / OS preference" },
@@ -19,19 +20,21 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Settings</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+          Metadata Standards &amp; Configurations
+        </h1>
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          Manage your account and application preferences
+          Configure biological metadata standards, persistent DOI attribution minting, and platform preferences.
         </p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="space-y-4">
           {[
-            { icon: User, label: "Profile", active: true },
-            { icon: Store, label: "Pharmacy", active: false },
-            { icon: Bell, label: "Notifications", active: false },
-            { icon: Shield, label: "Security", active: false },
+            { icon: Database, label: "Biological Metadata Standards", active: true },
+            { icon: Award, label: "DOI & Citation Minting", active: false },
+            { icon: User, label: "Contributor Profile", active: false },
+            { icon: Shield, label: "Security & API Access", active: false },
             { icon: Monitor, label: "Appearance", active: false },
           ].map((item) => (
             <button
@@ -49,12 +52,83 @@ export default function SettingsPage() {
         </div>
 
         <div className="lg:col-span-2 space-y-6">
+          {/* Biological Metadata Standards */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>Biological Metadata Protocols</CardTitle>
+                  <CardDescription>
+                    Contextual information required for cross-study metabolomic comparisons.
+                  </CardDescription>
+                </div>
+                <Badge variant="success">MIAMET Standard Enforced</Badge>
+              </div>
+            </CardHeader>
+            <div className="space-y-4">
+              <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 dark:border-gray-800 dark:bg-gray-900/50">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 mb-2">
+                  Mandatory Metadata Fields
+                </h4>
+                <ul className="grid gap-2 text-xs text-gray-600 dark:text-gray-300 sm:grid-cols-2">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+                    <strong>Species Name:</strong> NCBI Taxonomy ID &amp; Latin Binomial
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+                    <strong>Tissue Type:</strong> Plant organ / animal tissue / soil depth
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+                    <strong>Geographic Origin:</strong> GPS coordinates &amp; Bioclimatic Zone
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+                    <strong>Environmental Conditions:</strong> Drought / temperature / soil pH
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+                    <strong>Collection Method:</strong> Solvent extraction / flash-freezing
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+                    <strong>Storage Conditions:</strong> -80°C ultra-low / desiccation
+                  </li>
+                </ul>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Input label="Default Bio-Region" defaultValue="Sub-Saharan Africa (Pan-African)" />
+                <Input label="Metadata Standard Version" defaultValue="AMDB Metadata v2.4 (2026)" />
+              </div>
+            </div>
+          </Card>
+
+          {/* DOI Minting & Citation Setup */}
+          <Card>
+            <CardHeader>
+              <CardTitle>DOI Registration &amp; Scholarly Credit</CardTitle>
+              <CardDescription>
+                Configure persistent DOI assignment formats for contributed feature tables and spectral datasets.
+              </CardDescription>
+            </CardHeader>
+            <div className="space-y-4">
+              <Input label="DOI Registrar Node" defaultValue="DataCite / Zenodo AMDB Community Repository" />
+              <Input label="DOI Prefix Format" defaultValue="10.5281/zenodo.AMDB-2026-[ID]" />
+              <Input label="Default Citation Format" defaultValue="[Authors] ([Year]). [Title]. African Metabolome DB, DOI: [DOI]" />
+              <div className="flex justify-end">
+                <Button>Update Citation Settings</Button>
+              </div>
+            </div>
+          </Card>
+
+          {/* Theme / Appearance */}
           <Card>
             <CardHeader>
               <CardTitle>Appearance</CardTitle>
               <CardDescription>
-                Theme defaults to your system / browser preference and can be
-                overridden here.
+                Theme defaults to your system / browser preference and can be overridden here.
               </CardDescription>
             </CardHeader>
             <div className="grid gap-3 sm:grid-cols-3">
@@ -89,43 +163,6 @@ export default function SettingsPage() {
                   </button>
                 );
               })}
-            </div>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Profile Settings</CardTitle>
-              <CardDescription>Update your personal information</CardDescription>
-            </CardHeader>
-            <div className="space-y-4">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <Input label="First Name" placeholder="Admin" />
-                <Input label="Last Name" placeholder="User" />
-              </div>
-              <Input label="Email" type="email" placeholder="admin@metebolme.com" />
-              <Input label="Phone" placeholder="+1 (555) 000-0000" />
-              <div className="flex justify-end">
-                <Button>Save Changes</Button>
-              </div>
-            </div>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Institution Information</CardTitle>
-              <CardDescription>Manage your medical institution details</CardDescription>
-            </CardHeader>
-            <div className="space-y-4">
-              <Input label="Institution Name" placeholder="Your Medical Institution" />
-              <Input label="Practice License" placeholder="ML-12345" />
-              <Input label="Address" placeholder="123 Health Street" />
-              <div className="grid gap-4 sm:grid-cols-2">
-                <Input label="City" placeholder="New York" />
-                <Input label="State" placeholder="NY" />
-              </div>
-              <div className="flex justify-end">
-                <Button>Save Changes</Button>
-              </div>
             </div>
           </Card>
         </div>

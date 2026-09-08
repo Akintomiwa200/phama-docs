@@ -6,12 +6,12 @@ import { AreaChartComponent } from "@/components/charts/AreaChart";
 export function RevenueChart() {
   return (
     <AreaChartComponent
-      title="Dictionary Lookups"
+      title="Monthly Spectral Ingests &amp; Queries"
       data={SALES_DATA}
       xAxisKey="date"
       dataKeys={[
-        { key: "revenue", color: "#f43f5e", name: "Lookups" },
-        { key: "profit", color: "#22c55e", name: "Saved" },
+        { key: "revenue", color: "#f43f5e", name: "Spectral Queries" },
+        { key: "profit", color: "#22c55e", name: "Annotated Signals" },
       ]}
       height={350}
     />

@@ -3,7 +3,7 @@
 // No extra libraries: two identical copies sit on a `w-max` track that
 // animates `translateX(0 → -50%)`, which loops invisibly.
 
-const TEXT = "reimagining medical knowledge";
+const TEXT = "mapping the african metabolome";
 
 export function ReimaginingBanner() {
   return (

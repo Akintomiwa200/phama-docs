@@ -11,7 +11,7 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    // Fixed, transparent wrapper — just positions the pill with top/side inset.
+    // Fixed, transparent wrapper — positions the pill with top/side inset.
     <div className="pointer-events-none fixed inset-x-0 top-4 z-40 flex justify-center px-4 sm:px-6">
       <nav
         className={cn(
@@ -21,9 +21,7 @@ export function Navbar() {
           "dark:border-white/20"
         )}
       >
-        {/* Glass layer — kept separate from content so the adaptive text
-            below can blend against the real page backdrop (backdrop-filter
-            on the pill itself breaks mix-blend-mode in light mode). */}
+        {/* Glass layer */}
         <div
           aria-hidden="true"
           className={cn(
@@ -33,12 +31,12 @@ export function Navbar() {
           )}
         />
         {/* Logo — left column */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-6 w-6 items-center justify-center rounded-md bg-rose-500 text-white text-xs font-bold">
-            N
+        <Link href="/" className="flex items-center gap-2.5">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-rose-500 text-white text-xs font-bold tracking-wider">
+            AM
           </div>
-          <span className="text-adaptive text-sm font-bold">
-            Metebolme
+          <span className="text-adaptive text-sm font-bold tracking-tight">
+            African Metabolome DB
           </span>
         </Link>
 
@@ -51,7 +49,7 @@ export function Navbar() {
               className={cn(
                 "text-adaptive text-[13px] font-medium transition-opacity",
                 pathname === item.href
-                  ? "opacity-100"
+                  ? "opacity-100 font-semibold"
                   : "opacity-70 hover:opacity-100"
               )}
             >
@@ -62,15 +60,14 @@ export function Navbar() {
 
         {/* Right column — CTA + mobile toggle */}
         <div className="flex items-center gap-3 justify-self-end">
-          {/* Real CTA button — no avatar/dashboard icon */}
           <Link
-            href="/contact"
+            href="/reports"
             className="rounded-full bg-gray-900 px-5 py-2.5 text-[13px] font-medium text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
           >
-            Work with us
+            Submit Dataset & DOI
           </Link>
 
-          {/* Mobile-only nav-links toggle — never renders at md+ */}
+          {/* Mobile-only nav-links toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="rounded-full p-2 text-gray-500 hover:bg-gray-200/70 dark:text-gray-400 dark:hover:bg-gray-800 md:hidden"
@@ -94,7 +91,7 @@ export function Navbar() {
               className={cn(
                 "block rounded-lg px-3 py-2 text-adaptive text-sm font-medium transition-opacity",
                 pathname === item.href
-                  ? "opacity-100"
+                  ? "opacity-100 font-semibold"
                   : "opacity-70 hover:opacity-100"
               )}
             >

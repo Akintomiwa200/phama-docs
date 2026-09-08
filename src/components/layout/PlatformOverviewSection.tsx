@@ -1,11 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-// No extra libraries needed — the particle spheres are plain SVG, generated
-// with a small seeded random-number generator so the same seed always
-// produces the same layout (safe for server rendering, no hydration
-// mismatch, no client JS required).
-
 function mulberry32(seed: number) {
   return function random() {
     seed |= 0;
@@ -18,12 +13,9 @@ function mulberry32(seed: number) {
 
 type Particle = { x: number; y: number; r: number; o: number };
 
-function generateParticles(seed: number, count = 700): Particle[] {
+function generateParticles(seed: number, count = 650): Particle[] {
   const rand = mulberry32(seed);
   const points: Particle[] = [];
-
-  // Off-center "hot spot" so the cloud reads as an uneven, organic cluster
-  // rather than a uniform dot-filled circle — matching the reference.
   const clusterAngle = rand() * Math.PI * 2;
   const clusterDist = 0.2 + rand() * 0.25;
   const clusterX = Math.cos(clusterAngle) * clusterDist;
@@ -83,24 +75,30 @@ function ParticleSphere({
   );
 }
 
-const FEATURES = [
+const DOMAIN_FEATURES = [
   {
-    title: "Structured Drug Database",
+    title: "Plant Metabolomics",
     description:
-      "Every drug as a structured monograph &mdash; class, indications, dosages, interactions and references.",
+      "Medicinal plants, staple agricultural crops, wild plant biodiversity, and phytochemical structural diversity.",
     seed: 101,
   },
   {
-    title: "Cross-Linked Terminology",
+    title: "Agricultural Metabolomics",
     description:
-      "Hyperlinked terms connect symptoms, conditions, anatomy and pharmacology in one navigable graph.",
+      "Crop stress responses (drought/salinity), plant-microbe rhizosphere interactions, and soil metabolic signatures.",
     seed: 202,
   },
   {
-    title: "Curated Medical Library",
+    title: "Livestock Metabolomics",
     description:
-      "Trusted references, guidelines and reviews &mdash; organized, versioned and ready for lookup.",
+      "Metabolic indicators of indigenous animal health, feed metabolite composition, growth & productivity biomarkers.",
     seed: 303,
+  },
+  {
+    title: "Environmental Metabolomics",
+    description:
+      "Soil metabolomes, freshwater & coastal aquatic ecosystems, and microbial environmental chemistry.",
+    seed: 404,
   },
 ];
 
@@ -112,21 +110,20 @@ export function PlatformOverviewSection() {
         <div aria-hidden />
 
         <div className="flex flex-col items-start">
-          <h2 className="max-w-2xl text-left text-[2rem] font-bold leading-[1.2] tracking-tight text-gray-900 dark:text-gray-100 sm:text-[2.5rem]">
-            A living medical database that connects every term, drug and
-            condition.
+          <h2 className="max-w-3xl text-left text-[2rem] font-bold leading-[1.2] tracking-tight text-gray-900 dark:text-gray-100 sm:text-[2.5rem]">
+            Five integrated biological domains mapping ecosystem metabolism.
           </h2>
 
           <div className="mt-8 grid grid-cols-1 gap-x-12 gap-y-6 sm:grid-cols-2">
             <p className="text-[15px] leading-relaxed text-gray-500 dark:text-gray-400">
-              Our platform unifies medical terminology, pharmacology and
-              clinical references so every search returns a complete,
-              trusted answer.
+              Rather than focusing exclusively on human metabolomics, AMDB captures
+              the interconnected nature of ecosystems across plants, crops, livestock,
+              environments, and human health.
             </p>
             <p className="text-[15px] leading-relaxed text-gray-500 dark:text-gray-400">
-              By relating every entry to its anatomy, symptoms and related
-              drugs, we make complex medical knowledge fast to navigate and
-              easy to verify.
+              By linking detected features to known chemical structures, species metadata,
+              and environmental conditions, researchers gain unprecedented insight into
+              African biochemical networks.
             </p>
           </div>
 
@@ -134,15 +131,15 @@ export function PlatformOverviewSection() {
             href="/medications"
             className="mt-10 inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-3 text-[14px] font-medium text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
           >
-            Explore Drug Database
+            Explore Metabolites & Spectra
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
 
-      {/* Three-column feature grid with particle-sphere visuals */}
-      <div className="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-gray-200 dark:divide-gray-800 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-        {FEATURES.map((feature) => (
+      {/* Four-column feature grid with particle-sphere visuals */}
+      <div className="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-gray-200 dark:divide-gray-800 sm:grid-cols-2 lg:grid-cols-4 sm:divide-x sm:divide-y-0">
+        {DOMAIN_FEATURES.map((feature) => (
           <div key={feature.title} className="flex flex-col items-center px-6 py-16 text-center sm:px-8">
             <h3 className="max-w-[14rem] text-[15px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
               {feature.title}
@@ -150,7 +147,7 @@ export function PlatformOverviewSection() {
 
             <ParticleSphere
               seed={feature.seed}
-              className="mx-auto my-10 h-44 w-44"
+              className="mx-auto my-8 h-40 w-40"
             />
 
             <p className="max-w-[16rem] text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
