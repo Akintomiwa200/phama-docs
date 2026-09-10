@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { ScrollManager } from "@/components/layout/ScrollManager";
+import { AuthProvider } from "@/providers/auth";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,8 +39,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           data-theme-init
         />
         <ThemeProvider>
-          <ScrollManager />
-          {children}
+          <AuthProvider>
+            <ScrollManager />
+            {children}
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
