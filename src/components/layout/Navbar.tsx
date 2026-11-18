@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Menu, X, LogOut } from "lucide-react";
 import { cn } from "@/lib/helpers";
 import { useAuth } from "@/providers/auth";
+import { ScrambleLink } from "@/components/effects/ScrambleLink";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -53,12 +54,11 @@ export function Navbar() {
         <div className="flex items-center gap-2.5 justify-self-end">
           {user ? (
             <>
-              <Link
+              <ScrambleLink
                 href="/dashboard"
-                className="rounded-full bg-rose-500 px-5 py-2.5 text-[13px] font-semibold text-white transition-colors hover:bg-rose-600"
-              >
-                Dashboard
-              </Link>
+                label="Dashboard"
+                className="rounded-full bg-rose-500 px-5 py-2.5 font-mono text-[13px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-rose-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C8F031]"
+              />
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-900/10 text-xs font-bold text-gray-900 dark:bg-white/15 dark:text-white">
                 {initials}
               </div>
@@ -72,18 +72,16 @@ export function Navbar() {
             </>
           ) : (
             <>
-              <Link
+              <ScrambleLink
                 href="/login"
-                className="rounded-full border border-gray-900/20 px-5 py-2.5 text-[13px] font-medium text-gray-900 transition-colors hover:bg-gray-900/5 dark:border-white/25 dark:text-white dark:hover:bg-white/10"
-              >
-                Sign in
-              </Link>
-              <Link
+                label="Sign in"
+                className="rounded-full border border-gray-900/20 px-5 py-2.5 font-mono text-[13px] font-medium uppercase tracking-[0.08em] text-gray-900 transition-colors hover:bg-gray-900/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C8F031] dark:border-white/25 dark:text-white dark:hover:bg-white/10"
+              />
+              <ScrambleLink
                 href="/signup"
-                className="rounded-full bg-rose-500 px-5 py-2.5 text-[13px] font-semibold text-white transition-colors hover:bg-rose-600"
-              >
-                Get Started
-              </Link>
+                label="Get Started"
+                className="rounded-full bg-rose-500 px-5 py-2.5 font-mono text-[13px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-rose-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C8F031]"
+              />
             </>
           )}
 

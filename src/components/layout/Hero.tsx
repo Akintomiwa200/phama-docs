@@ -4,9 +4,15 @@ import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
-import { searchIndex, entryHref, popularItems } from "@/lib/search";
+import {
+  searchIndex,
+  entryHref,
+  popularItems,
+  SEARCH_TYPES,
+} from "@/lib/search";
 import { ItemVisual } from "@/components/dictionary/ItemVisual";
-import type { SearchItem } from "@/lib/types";
+import { HeroScrambleHeadline } from "@/components/effects/HeroScrambleHeadline";
+import type { SearchItem, SearchItemType } from "@/lib/types";
 
 export function Hero() {
   const router = useRouter();
@@ -17,10 +23,18 @@ export function Hero() {
   const trimmed = query.trim();
 
   const suggestions = useMemo(
-    () => (trimmed ? searchIndex(query, 8) : popularItems(8)),
+    () => (trimmed ? searchIndex(query, 30) : popularItems(14)),
     [query, trimmed]
   );
   const isPopular = !trimmed;
+
+  const typeSummary = useMemo(() => {
+    const counts = new Map<SearchItemType, number>();
+    for (const item of suggestions) {
+      counts.set(item.type, (counts.get(item.type) ?? 0) + 1);
+    }
+    return [...counts.entries()];
+  }, [suggestions]);
 
   const closeSoon = () => {
     if (blurTimer.current) clearTimeout(blurTimer.current);
@@ -33,9 +47,8 @@ export function Hero() {
 
   const submit = (value: string) => {
     const q = value.trim();
-    if (!q) return;
     setOpen(false);
-    router.push(`/search?q=${encodeURIComponent(q)}`);
+    router.push(q ? `/search?q=${encodeURIComponent(q)}` : "/search");
   };
 
   const select = (item: SearchItem) => {
@@ -179,33 +192,8 @@ export function Hero() {
           xl:px-12
         "
       >
-        {/* Heading */}
-        <div className="relative">
-          <h1
-            className="
-              text-[42px]
-              font-[600]
-              leading-[0.92]
-              tracking-[-0.055em]
-              text-black
-              dark:text-gray-100
-              sm:text-[48px]
-              lg:text-[54px]
-              xl:text-[58px]
-            "
-          >
-            African Metabolome
-            <br />
-
-            <span className="font-[400] text-[#9b9b9f] dark:text-gray-500">
-              Database,
-            </span>
-
-            <br />
-
-            Multi-Domain Platform
-          </h1>
-        </div>
+        {/* Heading — mono scramble lines (decode poster mechanic) */}
+        <HeroScrambleHeadline />
 
         {/* =======================================================
             SEARCH
@@ -225,7 +213,7 @@ export function Hero() {
                 onFocus={() => setOpen(true)}
                 onBlur={closeSoon}
                 onKeyDown={onKeyDown}
-                placeholder="Search LC-MS/MS features, NMR spectra, phytochemicals, DOIs..."
+                placeholder="Search metabolites, spectra, images, videos, documentaries, keywords..."
                 aria-label="Search the African Metabolome Database"
                 aria-autocomplete="list"
                 className="w-full bg-transparent py-2 text-sm text-gray-900 outline-none placeholder:text-gray-400 dark:text-gray-100 dark:placeholder:text-gray-500"
@@ -239,6 +227,11 @@ export function Hero() {
               </button>
             </div>
 
+            <p className="mt-2 px-3 text-center text-[10px] text-gray-400 dark:text-gray-500">
+              One live index across {SEARCH_TYPES.length} record types · images
+              · videos · documentaries · keywords · spectra · datasets
+            </p>
+
             {/* Live suggestions */}
             {open && (
               <div
@@ -248,12 +241,18 @@ export function Hero() {
               >
                 {suggestions.length > 0 ? (
                   <>
-                    <ul className="max-h-[320px] overflow-y-auto p-2">
-                      {isPopular && (
-                        <li className="px-3 pb-1 pt-1.5 text-[9px] font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500">
-                          Popular metabolomic queries
-                        </li>
-                      )}
+                    <div className="flex items-center justify-between border-b border-gray-100 px-4 py-2 dark:border-gray-800">
+                      <span className="text-[9px] font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500">
+                        {isPopular
+                          ? "Featured across every record type"
+                          : `Top matches for “${trimmed}”`}
+                      </span>
+                      <span className="text-[9px] text-gray-400 dark:text-gray-500">
+                        {suggestions.length}
+                        {isPopular ? " featured" : " results"}
+                      </span>
+                    </div>
+                    <ul className="max-h-[360px] overflow-y-auto p-2">
                       {suggestions.map((item, i) => (
                         <li key={item.id}>
                           <button
@@ -280,6 +279,11 @@ export function Hero() {
                                 <span className="shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-[9px] font-medium uppercase tracking-wide text-gray-500 dark:bg-gray-800 dark:text-gray-400">
                                   {item.type}
                                 </span>
+                                {item.duration && (
+                                  <span className="shrink-0 font-mono text-[9px] text-gray-400">
+                                    {item.duration}
+                                  </span>
+                                )}
                               </span>
                               <span className="mt-0.5 block truncate text-xs text-gray-500 dark:text-gray-400">
                                 {item.description}
@@ -289,52 +293,56 @@ export function Hero() {
                         </li>
                       ))}
                     </ul>
-                    {!isPopular && (
-                      <div className="border-t border-gray-100 px-4 py-2.5 dark:border-gray-800">
-                        <button
-                          type="button"
-                          onPointerDown={(e) => {
-                            e.preventDefault();
-                            submit(query);
-                          }}
-                          className="flex w-full items-center justify-between text-[11px] font-medium text-gray-500 transition-colors hover:text-rose-500 dark:text-gray-400"
-                        >
-                          <span>
-                            Show all results for &ldquo;{trimmed}&rdquo;
+                    {!isPopular && typeSummary.length > 0 && (
+                      <div className="flex flex-wrap gap-x-2 gap-y-1 border-t border-gray-100 px-4 py-2 text-[9px] uppercase tracking-wide text-gray-400 dark:border-gray-800 dark:text-gray-500">
+                        {typeSummary.map(([type, count]) => (
+                          <span key={type}>
+                            {type} {count}
                           </span>
-                          <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[9px] text-gray-500 dark:bg-gray-800 dark:text-gray-400">
-                            Enter
-                          </span>
-                        </button>
+                        ))}
                       </div>
                     )}
+                    <div className="border-t border-gray-100 px-4 py-2.5 dark:border-gray-800">
+                      <button
+                        type="button"
+                        onPointerDown={(e) => {
+                          e.preventDefault();
+                          submit(query);
+                        }}
+                        className="flex w-full items-center justify-between text-[11px] font-medium text-gray-500 transition-colors hover:text-rose-500 dark:text-gray-400"
+                      >
+                        <span>
+                          {isPopular
+                            ? "Browse all records in the database"
+                            : `Show all results for “${trimmed}”`}
+                        </span>
+                        <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[9px] text-gray-500 dark:bg-gray-800 dark:text-gray-400">
+                          Enter
+                        </span>
+                      </button>
+                    </div>
                   </>
                 ) : (
-                  <p className="px-5 py-6 text-center text-sm text-gray-500 dark:text-gray-400">
-                    No matches for &ldquo;{trimmed}&rdquo;. Try searching{" "}
-                    <button
-                      type="button"
-                      className="font-medium text-rose-500 hover:underline"
-                      onPointerDown={(e) => {
-                        e.preventDefault();
-                        submit("Artemisinin");
-                      }}
-                    >
-                      Artemisinin
-                    </button>{" "}
-                    or{" "}
-                    <button
-                      type="button"
-                      className="font-medium text-rose-500 hover:underline"
-                      onPointerDown={(e) => {
-                        e.preventDefault();
-                        submit("Sorghum");
-                      }}
-                    >
-                      Sorghum
-                    </button>
-                    .
-                  </p>
+                  <div className="px-5 py-6 text-center">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      No matches for “{trimmed}”. Try a compound, a place, a
+                      DOI, or browse a record type.
+                    </p>
+                    <div className="mt-3 flex flex-wrap justify-center gap-1.5">
+                      {["Image", "Video", "Documentary", "Keyword"].map(
+                        (type) => (
+                          <Link
+                            key={type}
+                            href={`/search?type=${type}`}
+                            onPointerDown={cancelClose}
+                            className="rounded-full border border-gray-200 px-3 py-1 text-[11px] font-medium text-gray-600 hover:border-rose-200 hover:text-rose-600 dark:border-gray-700 dark:text-gray-300"
+                          >
+                            {type}s
+                          </Link>
+                        )
+                      )}
+                    </div>
+                  </div>
                 )}
               </div>
             )}

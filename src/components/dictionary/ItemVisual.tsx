@@ -1,5 +1,17 @@
 import type { ReactNode } from "react";
-import { BookOpen, Pill, FileText, Leaf, Database, Activity, Globe } from "lucide-react";
+import {
+  BookOpen,
+  Pill,
+  FileText,
+  Leaf,
+  Database,
+  Activity,
+  Globe,
+  Image as ImageIcon,
+  Video,
+  Clapperboard,
+  Tag,
+} from "lucide-react";
 import type { SearchItem, SearchItemType } from "@/lib/types";
 
 const TYPE_ICON: Record<SearchItemType, React.ComponentType<{ className?: string }>> = {
@@ -10,6 +22,10 @@ const TYPE_ICON: Record<SearchItemType, React.ComponentType<{ className?: string
   Term: BookOpen,
   Drug: Pill,
   Article: FileText,
+  Image: ImageIcon,
+  Video,
+  Documentary: Clapperboard,
+  Keyword: Tag,
 };
 
 const MOTIFS: Record<string, ReactNode> = {
@@ -73,6 +89,32 @@ const MOTIFS: Record<string, ReactNode> = {
       <path d="M78 52 C82 60, 90 64, 92 72" />
     </g>
   ),
+  film: (
+    <g stroke="#fff" fill="none" strokeWidth="2.5" strokeLinejoin="round">
+      <rect x="16" y="26" width="68" height="48" rx="6" />
+      <path d="M16 40 H84 M16 60 H84 M34 26 V74 M66 26 V74" />
+      <path d="M46 42 L58 50 L46 58 Z" fill="#fff" stroke="none" />
+    </g>
+  ),
+  camera: (
+    <g stroke="#fff" fill="none" strokeWidth="2.5" strokeLinejoin="round">
+      <rect x="14" y="33" width="50" height="36" rx="6" />
+      <path d="M64 44 L86 34 V68 L64 58 Z" />
+      <circle cx="39" cy="51" r="9" />
+    </g>
+  ),
+  tag: (
+    <g stroke="#fff" fill="none" strokeWidth="2.5" strokeLinejoin="round">
+      <path d="M18 22 H50 L82 54 L54 82 L18 46 Z" />
+      <circle cx="34" cy="38" r="6" />
+    </g>
+  ),
+  landscape: (
+    <g stroke="#fff" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 74 L36 42 L52 62 L66 46 L88 74 Z" />
+      <circle cx="72" cy="28" r="8" />
+    </g>
+  ),
 };
 
 const TILE_GRADIENT: Record<SearchItemType, string> = {
@@ -83,6 +125,10 @@ const TILE_GRADIENT: Record<SearchItemType, string> = {
   Term: "from-rose-500 to-rose-400",
   Drug: "from-emerald-500 to-emerald-400",
   Article: "from-sky-500 to-sky-400",
+  Image: "from-fuchsia-500 to-rose-400",
+  Video: "from-orange-500 to-amber-400",
+  Documentary: "from-slate-800 to-slate-600",
+  Keyword: "from-teal-500 to-cyan-400",
 };
 
 function FormulaBadge({ value, size }: { value: string; size: "sm" | "md" | "lg" }) {
@@ -105,22 +151,35 @@ function ImageTile({
   motif,
   type,
   size,
+  play = false,
 }: {
   motif: string;
   type: SearchItemType;
   size: "sm" | "md" | "lg";
+  play?: boolean;
 }) {
   const tileCls =
     size === "sm" ? "h-9 w-9" : size === "lg" ? "h-16 w-16" : "h-10 w-10";
   const svgCls =
     size === "sm" ? "h-6 w-6" : size === "lg" ? "h-12 w-12" : "h-8 w-8";
+  const playCls =
+    size === "sm" ? "h-3 w-3" : size === "lg" ? "h-6 w-6" : "h-4 w-4";
   return (
     <span
-      className={`flex shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${TILE_GRADIENT[type]} ${tileCls}`}
+      className={`relative flex shrink-0 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br ${TILE_GRADIENT[type]} ${tileCls}`}
     >
       <svg viewBox="0 0 100 100" className={svgCls} aria-hidden="true">
         {MOTIFS[motif] ?? MOTIFS.rings}
       </svg>
+      {play && (
+        <span className="absolute inset-0 flex items-center justify-center bg-black/25">
+          <span className="flex items-center justify-center rounded-full bg-white/90 text-gray-900 shadow-sm">
+            <svg viewBox="0 0 24 24" fill="currentColor" className={playCls} aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
+        </span>
+      )}
     </span>
   );
 }
@@ -153,12 +212,23 @@ export function ItemVisual({
   item: SearchItem;
   size?: "sm" | "md" | "lg";
 }) {
-  if (item.media?.format === "formula") {
-    return <FormulaBadge value={item.media.value} size={size} />;
+  const media = item.media;
+  if (media?.format === "formula") {
+    return <FormulaBadge value={media.value} size={size} />;
   }
-  if (item.media?.format === "image") {
+  if (media && "motif" in media) {
+    const play =
+      item.type === "Video" ||
+      item.type === "Documentary" ||
+      media.format === "video" ||
+      media.format === "documentary";
     return (
-      <ImageTile motif={item.media.motif} type={item.type} size={size} />
+      <ImageTile
+        motif={media.motif}
+        type={item.type}
+        size={size}
+        play={play}
+      />
     );
   }
   return <FallbackIcon item={item} size={size} />;

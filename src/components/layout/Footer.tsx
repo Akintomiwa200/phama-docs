@@ -18,6 +18,7 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer
+      id="footer"
       className="
         relative
         isolate

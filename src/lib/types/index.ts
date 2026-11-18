@@ -122,11 +122,36 @@ export interface NavItem {
   icon?: string;
 }
 
-export type SearchItemType = "Metabolite" | "Dataset" | "Spectrum" | "Domain" | "Term" | "Drug" | "Article";
+export type SearchItemType =
+  | "Metabolite"
+  | "Dataset"
+  | "Spectrum"
+  | "Domain"
+  | "Term"
+  | "Drug"
+  | "Article"
+  | "Image"
+  | "Video"
+  | "Documentary"
+  | "Keyword";
 
 export type SearchMedia =
-  | { format: "image"; motif: string }
-  | { format: "formula"; value: string };
+  | { format: "image"; motif: string; caption?: string; credit?: string }
+  | { format: "formula"; value: string }
+  | {
+      format: "video";
+      motif: string;
+      duration?: string;
+      caption?: string;
+      credit?: string;
+    }
+  | {
+      format: "documentary";
+      motif: string;
+      duration?: string;
+      caption?: string;
+      credit?: string;
+    };
 
 export interface SearchItem {
   id: string;
@@ -140,6 +165,22 @@ export interface SearchItem {
   domain?: DomainCategory;
   mz?: number;
   platform?: string;
+  /** Free-text tags used by search and keyword records. */
+  keywords?: string[];
+  /** Person, lab, studio, or institution credited with the record. */
+  creator?: string;
+  /** Runtime for video/documentary records, e.g. "08:42". */
+  duration?: string;
+  /** ISO publication / capture date. */
+  publishedAt?: string;
+  /** Repository, broadcaster, or collection that holds the record. */
+  source?: string;
+  /** Searchable transcript excerpt for audio-visual records. */
+  transcript?: string;
+  /** Chapter / section labels for video and documentary records. */
+  chapters?: string[];
+  /** Explicit cross-links to related record IDs. */
+  relatedIds?: string[];
 }
 
 // Legacy support interface

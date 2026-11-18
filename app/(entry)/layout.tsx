@@ -1,17 +1,13 @@
-
 export default function EntryLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col">
-      <div className="flex flex-1">
-        <main className="mx-auto w-full max-w-7xl flex-1 bg-gray-50 p-6 pt-8 dark:bg-gray-950">
-          {children}
-        </main>
-      </div>
-
+    <div className="min-h-screen w-full bg-gray-50 dark:bg-gray-950">
+      <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        {children}
+      </main>
     </div>
   );
 }

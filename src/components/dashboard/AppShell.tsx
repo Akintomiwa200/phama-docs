@@ -16,7 +16,14 @@ const PATH_LABELS: Record<string, string> = {
   "/search": "Search the Metabolome",
 };
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+export function AppShell({
+  children,
+  requireAuth = true,
+}: {
+  children: React.ReactNode;
+  /** Public routes (search, entry pages) render without the auth gate. */
+  requireAuth?: boolean;
+}) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -68,7 +75,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <span className="truncate">Search features, spectra, DOIs...</span>
             </Link>
 
-            {user && (
+            {user ? (
               <div className="flex items-center gap-2">
                 <div
                   className="flex h-9 w-9 items-center justify-center rounded-full bg-rose-500 text-xs font-bold text-white"
@@ -84,12 +91,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   <LogOut className="h-4 w-4" />
                 </button>
               </div>
+            ) : (
+              <Link
+                href="/login"
+                className="rounded-full bg-rose-500 px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-rose-600"
+              >
+                Sign in
+              </Link>
             )}
           </div>
         </header>
 
         <main className="w-full flex-1 px-4 py-6 sm:px-6 lg:px-8">
-          <RequireAuth>{children}</RequireAuth>
+          {requireAuth ? <RequireAuth>{children}</RequireAuth> : children}
         </main>
       </div>
     </div>

@@ -6,18 +6,17 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useState,
+  useSyncExternalStore,
 } from "react";
 import { useRouter } from "next/navigation";
 import {
   type AuthUser,
-  USERS_KEY,
   SESSION_KEY,
+  USERS_KEY,
   writeJSON,
   getUsers,
   findUser,
   normalizeEmail,
-  readSession,
   hashPassword,
 } from "@/lib/authStorage";
 
@@ -25,6 +24,7 @@ type AuthResult = { ok: boolean; error?: string };
 
 type AuthContextValue = {
   user: AuthUser | null;
+  ready: boolean;
   signIn: (email: string, password: string) => Promise<AuthResult>;
   signUp: (
     name: string,
@@ -35,13 +35,65 @@ type AuthContextValue = {
   signOut: () => void;
 };
 
+/* --------------------------------------------------------------------------
+   Session store — localStorage read through useSyncExternalStore so the
+   server HTML (signed out) and the hydrated client agree, then the stored
+   session is adopted after hydration without any setState-in-effect.
+   -------------------------------------------------------------------------- */
+const listeners = new Set<() => void>();
+
+function emitSession() {
+  listeners.forEach((listener) => listener());
+}
+
+function subscribeSession(onStoreChange: () => void) {
+  listeners.add(onStoreChange);
+  const onStorage = (event: StorageEvent) => {
+    if (!event.key || event.key === SESSION_KEY) onStoreChange();
+  };
+  window.addEventListener("storage", onStorage);
+  return () => {
+    listeners.delete(onStoreChange);
+    window.removeEventListener("storage", onStorage);
+  };
+}
+
+function getSessionSnapshot(): string | null {
+  if (typeof window === "undefined") return null;
+  return localStorage.getItem(SESSION_KEY);
+}
+
+function getSessionServerSnapshot(): null {
+  return null;
+}
+
+const subscribeNoop = () => () => {};
+const getClientReady = () => true;
+const getServerReady = () => false;
+
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<AuthUser | null>(() => {
-    if (typeof window === "undefined") return null;
-    return readSession();
-  });
+  const sessionRaw = useSyncExternalStore(
+    subscribeSession,
+    getSessionSnapshot,
+    getSessionServerSnapshot
+  );
+  // False during SSR/hydration, true once the client is live.
+  const ready = useSyncExternalStore(
+    subscribeNoop,
+    getClientReady,
+    getServerReady
+  );
+
+  const user = useMemo<AuthUser | null>(() => {
+    if (!sessionRaw) return null;
+    try {
+      return JSON.parse(sessionRaw) as AuthUser;
+    } catch {
+      return null;
+    }
+  }, [sessionRaw]);
 
   const signIn = useCallback(
     async (email: string, password: string): Promise<AuthResult> => {
@@ -59,7 +111,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         createdAt: existing.createdAt,
       };
       writeJSON(SESSION_KEY, session);
-      setUser(session);
+      emitSession();
       return { ok: true };
     },
     []
@@ -76,8 +128,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) {
         return { ok: false, error: "Enter a valid email address." };
       }
-      if (password.length < 6) {
-        return { ok: false, error: "Password must be at least 6 characters." };
+      if (password.length < 8) {
+        return { ok: false, error: "Password must be at least 8 characters." };
+      }
+      if (!/[A-Z]/.test(password)) {
+        return {
+          ok: false,
+          error: "Password must include one uppercase letter.",
+        };
+      }
+      if (!/[0-9]/.test(password)) {
+        return { ok: false, error: "Password must include one number." };
       }
       if (findUser(normalized)) {
         return {
@@ -99,7 +160,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         createdAt: newUser.createdAt,
       };
       writeJSON(SESSION_KEY, session);
-      setUser(session);
+      emitSession();
       return { ok: true };
     },
     []
@@ -111,8 +172,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (!existing) {
         return { ok: false, error: "No account found with that email address." };
       }
-      if (password.length < 6) {
-        return { ok: false, error: "Password must be at least 6 characters." };
+      if (password.length < 8) {
+        return { ok: false, error: "Password must be at least 8 characters." };
+      }
+      if (!/[A-Z]/.test(password)) {
+        return {
+          ok: false,
+          error: "Password must include one uppercase letter.",
+        };
+      }
+      if (!/[0-9]/.test(password)) {
+        return { ok: false, error: "Password must include one number." };
       }
       const passwordHash = await hashPassword(password);
       const users = getUsers().map((u) =>
@@ -126,12 +196,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = useCallback(() => {
     localStorage.removeItem(SESSION_KEY);
-    setUser(null);
+    emitSession();
   }, []);
 
   const value = useMemo(
-    () => ({ user, signIn, signUp, resetPassword, signOut }),
-    [user, signIn, signUp, resetPassword, signOut]
+    () => ({ user, ready, signIn, signUp, resetPassword, signOut }),
+    [user, ready, signIn, signUp, resetPassword, signOut]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -144,13 +214,13 @@ export function useAuth(): AuthContextValue {
 }
 
 export function RequireAuth({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth();
+  const { user, ready } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) router.replace("/login");
-  }, [user, router]);
+    if (ready && !user) router.replace("/login");
+  }, [ready, user, router]);
 
-  if (!user) return null;
+  if (!ready || !user) return null;
   return <>{children}</>;
 }
